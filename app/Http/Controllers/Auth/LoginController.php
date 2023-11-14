@@ -106,6 +106,7 @@ class LoginController extends Controller
 
             return response()->json([
                 'status' => $this->success,
+                'message'=> "Login Successful",
                 'data' => $user,
                 'plans'=> $plans
             ], 200);
