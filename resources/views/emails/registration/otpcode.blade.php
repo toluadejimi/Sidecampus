@@ -110,7 +110,7 @@
                                                                                         <p>If you have any questions or
                                                                                             need help, don't hesitate to
                                                                                             reach out.
-                                                                                            support@gomobilez.com</p>
+                                                                                            support@sidecampus.com</p>
                                                                                     </div>
             </div>
             </td>
