@@ -67,8 +67,6 @@ class LoginController extends Controller
 
 
         $get_device_id = Auth::user()->device_id ?? null;
-        $get_deviceIdentifier = Auth::user()->deviceIdentifier ?? null;
-        $get_deviceName = Auth::user()->deviceName ?? null;
         $get_ip = Auth::user()->ip_address ?? null;
 
 
@@ -98,7 +96,6 @@ class LoginController extends Controller
         }
 
             $token = auth()->user()->createToken('API Token')->accessToken;
-
             $myplan = MyPlan::select('id','user_id', 'plan_id', 'amount', 'status')->where('user_id', Auth::id())->first() ?? null;
             $plans = Plan::select('id','title','amount', 'period')->get() ?? null;
             $user = Auth()->user();
