@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\VoiceController;
 use App\Http\Controllers\Auth\RegisterationController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NumberController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\Transaction\EnkpayposController;
 use App\Http\Controllers\Transaction\TransactionController;
 use App\Http\Controllers\Virtual\VirtualaccountController;
 use Illuminate\Support\Facades\Route;
@@ -38,14 +37,8 @@ Route::post('forgot-password', [RegisterationController::class, 'forgot_password
 Route::post('reset-password', [RegisterationController::class, 'reset_password']);
 
 
-Route::get('token', [VoiceController::class, 'token']);
+Route::get('slider', [HomeController::class, 'home']);
 
-Route::post('callback', [VoiceController::class, 'callback']);
-Route::get('fallback', [VoiceController::class, 'fallback']);
-Route::post('voice_url', [VoiceController::class, 'voice_url']);
-
-Route::post('sms-webhook', [VoiceController::class, 'sms_webhook']);
-Route::post('sms-webhook2', [VoiceController::class, 'sms_webhook2']);
 
 
 
@@ -145,7 +138,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('pay-now', [PaymentController::class, 'create_order']);
     Route::post('verify-payment', [PaymentController::class, 'verify_payment']);
 
-    Route::get('get-countries', [NumberController::class, 'get_countries']);
+    Route::post('home', [HomeController::class, 'home']);
     Route::post('get-list-numbers', [NumberController::class, 'get_list_numbers']);
     Route::post('buy-number', [NumberController::class, 'buy_number']);
     Route::post('delete-number', [NumberController::class, 'delete_number']);
