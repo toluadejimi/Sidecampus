@@ -95,13 +95,37 @@ class LoginController extends Controller
             ], 401);
         }
 
+
+        $p = MyPlan::where('user_id', Auth::id())->first()->status ?? null;
+
+        if ($p == 1) {
+            $e_date = MyPlan::where('user_id', Auth::id())->first()->expires_at ?? null;
+            $nowDate = date('Y-m-d');
+            $endDate = Carbon::parse($e_date);
+            $differenceInDays = $endDate->diffInDays($nowDate);
+
+            MyPlan::where('user_id', Auth::id())->update([
+                'days_remaining' => $differenceInDays,
+            ]);
+
+        }
+
+
+        $exp = MyPlan::where('user_id', Auth::id())->first()->days_remaining ?? null;
+        if ($exp == 0) {
+
+            MyPlan::where('user_id', Auth::id())->update([
+                'status' => 0,
+            ]);
+        }
+
+
             $token = auth()->user()->createToken('API Token')->accessToken;
-            $myplan = MyPlan::select('id','user_id', 'plan_id', 'amount', 'status')->where('user_id', Auth::id())->first() ?? null;
+            $myplan = MyPlan::select('status', 'subscribe_at','days_remaining','expires_at')->where('user_id', Auth::id())->first() ?? null;
             $plans = Plan::select('id','title','amount', 'period')->get() ?? null;
             $user = Auth()->user();
             $user['token'] = $token;
             $user['my_plan'] = $myplan;
-            //$user['plans'] = $plans;
 
 
             return response()->json([

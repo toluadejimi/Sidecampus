@@ -135,10 +135,36 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
 
 
     //Payment
-    Route::post('pay-now', [PaymentController::class, 'create_order']);
+    Route::post('subscribe', [PaymentController::class, 'create_order']);
     Route::post('verify-payment', [PaymentController::class, 'verify_payment']);
 
     Route::post('home', [HomeController::class, 'home']);
+    Route::post('view-book', [HomeController::class, 'view_book']);
+    Route::post('add-favorite', [HomeController::class, 'add_favorite']);
+    Route::post('read-book', [HomeController::class, 'read_book']);
+    Route::post('play-audio', [HomeController::class, 'play_audio']);
+
+    Route::post('add-review', [HomeController::class, 'add_review']);
+
+
+    Route::post('search', [HomeController::class, 'search']);
+
+    Route::get('get-all-books', [HomeController::class, 'get_all_books']);
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
     Route::post('get-list-numbers', [NumberController::class, 'get_list_numbers']);
     Route::post('buy-number', [NumberController::class, 'buy_number']);
     Route::post('delete-number', [NumberController::class, 'delete_number']);

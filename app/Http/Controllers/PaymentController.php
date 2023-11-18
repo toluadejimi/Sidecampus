@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Plan;
+use App\Models\MyPlan;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Session;
+use Carbon\Carbon;
 use Stripe;
 
 
@@ -26,41 +27,12 @@ class PaymentController extends Controller
 
 
 
-        if ($request->vendor == 'pay_pal')
-        {
+        if ($request->vendor == 'pay_pal') {
             $token = pay_pal_token();
-            $trxID = "GFUND-" . date('ymd-his');
+            $trxID = "SIDE-" . date('ymd-his');
+            $user_id = Auth::id();
 
-
-            if ($request->amount == null) {
-
-
-                return response()->json([
-                    'status' => false,
-                    'message' => "Amount can not be empty",
-                ], 500);
-            }
-
-
-            if ($request->amount > 1000) {
-
-
-                return response()->json([
-                    'status' => false,
-                    'message' => "Amount can not be be more than $1000",
-                ], 500);
-            }
-
-
-            if ($request->amount < 10) {
-
-
-                return response()->json([
-                    'status' => false,
-                    'message' => "Amount can not be be less than $10",
-                ], 500);
-            }
-
+            $cost = Plan::where('id', 1)->first()->amount ?? null;
 
             $url = url('');
 
@@ -70,13 +42,13 @@ class PaymentController extends Controller
                 "purchase_units" => [[
                     "reference_id" => "$trxID",
                     "amount" => [
-                        "value" => "$request->amount",
+                        "value" => $cost,
                         "currency_code" => "USD"
                     ]
                 ]],
                 "application_context" => [
                     "cancel_url" => "$url/cancel?status=false&ref=$trxID",
-                    "return_url" => "$url/success?status=true&ref=$trxID&amount=$request->amount"
+                    "return_url" => "$url/success?status=true&ref=$trxID&amount=$cost&user_id=$user_id"
                 ]
             ];
 
@@ -104,22 +76,21 @@ class PaymentController extends Controller
             curl_close($curl);
 
             $var = json_decode($var);
-            $link =$var->links[1]->href ?? null;
+            $link = $var->links[1]->href ?? null;
             $query = parse_url($link, PHP_URL_QUERY);
             parse_str($query, $query_params);
             $token = $query_params['token'];
 
-            // $final = json_encode($link);
 
 
 
-            $body['href'] = $link;
+            $body = $link;
 
 
             $trx = new Transaction();
             $trx->trx_id = $trxID;
             $trx->user_id = Auth::id();
-            $trx->amount = $request->amount;
+            $trx->amount = $cost;
             $trx->status = 3; //initiated;
             $trx->type = 2; //credit
             $trx->token = $token;
@@ -134,9 +105,6 @@ class PaymentController extends Controller
                     'status' => true,
                     'data' => $body,
                 ], 200);
-
-
-
             } else {
 
 
@@ -150,8 +118,9 @@ class PaymentController extends Controller
         if ($request->vendor == "stripe") {
 
 
+            $cost = Plan::where('id', 1)->first()->amount ?? null;
             $email = Auth::user()->email;
-            $body['href'] = url('')."/stripe?amount=$request->amount&email=$email";
+            $body = url('') . "/stripe?amount=$cost&email=$email";
 
 
 
@@ -159,76 +128,93 @@ class PaymentController extends Controller
                 'status' => true,
                 'data' => $body,
             ], 200);
-
-
-
-
         }
-
-
-
-
     }
 
 
-    public function charge(request $request){
+    public function charge(request $request)
+    {
 
 
         $tok = $request->stripeToken;
         $final = str_replace(" ", "", $tok);
 
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-       $stripe =  Stripe\Charge::create ([
-                "amount" => $request->amount*100,
-                "currency" => "USD",
-                "source" => $final,
-                "description" => "Wallet funding on Gomobilez",
+        $stripe =  Stripe\Charge::create([
+            "amount" => $request->amount * 100,
+            "currency" => "USD",
+            "source" => $final,
+            "description" => "Wallet funding on Side Campus",
         ]);
 
 
 
         $status = $stripe->status ?? null;
 
-        if($status == 'succeeded'){
+        if ($status == 'succeeded') {
 
-            User::where('email', $request->email)->increment('wallet', $request->amount);
+            $amount = Plan::where('id', 1)->first()->amount ?? null;
+            $user_id = User::where('email', $request->email)->first()->id;
 
-            $ref = "FUND".random_int(0000,9999).date("his");
+            $currentDate = Carbon::now();
+            $expirationDate = $currentDate->addMonth();
 
+
+            $currentDateFormatted = $currentDate->toDateString();
+            $expirationDateFormatted = $expirationDate->toDateString();
+
+
+            //dd($currentDateFormatted, $expirationDateFormatted);
+
+            $plan = new MyPlan();
+            $plan->user_id = $user_id;
+            $plan->subscribe_at = date('Y-m-d');
+            $plan->expires_at = $expirationDateFormatted;
+            $plan->days_remaining = 0;
+            $plan->status = 1;
+            $plan->amount = $amount;
+            $plan->save();
+
+
+
+            $ref = "FUND" . random_int(0000, 9999) . date("his");
             $amount = $request->amount;
 
             return view('success', compact('ref', 'amount'));
+        } else {
 
-
-            echo "Payment_successful";
-
-        }else{
-                echo "Payment_declined";
+            return view('decline', compact('ref', 'amount'));
         }
-
-
-
-
-
-
-
-
-
     }
 
 
 
-    public function success(request $request){
+    public function success(request $request)
+    {
 
 
-        if($request->ref == null || $request->amount == null ){
-            $ref = "FUND".random_int(0000,9999).date("his");
-        }else{
+        if ($request->ref == null || $request->amount == null) {
+            $ref = "FUND" . random_int(0000, 9999) . date("his");
+        } else {
             $ref = $request->ref;
-            $amount = $request->amount;
-
+            $amount = Plan::where('id', 1)->first()->amount ?? null;
         }
 
+        $amount = Plan::where('id', 1)->first()->amount ?? null;
+
+        $currentDate = Carbon::now();
+        $expirationDate = $currentDate->addMonth();
+        $currentDateFormatted = $currentDate->toDateString();
+        $expirationDateFormatted = $expirationDate->toDateString();
+
+        $plan = new MyPlan();
+        $plan->user_id = $request->user_id;
+        $plan->subscribe_at = date('Y-m-d');
+        $plan->expires_at = $expirationDateFormatted;
+        $plan->days_remaining = 0;
+        $plan->status = 1;
+        $plan->amount = $amount;
+        $plan->save();
 
 
 
@@ -236,30 +222,26 @@ class PaymentController extends Controller
     }
 
 
-    public function decline(){
-
-        $ref = "FUND".random_int(0000,9999).date("his");
-
-
+    public function decline()
+    {
+        $ref = "FUND" . random_int(0000, 9999) . date("his");
         return view('decline', compact('ref'));
     }
 
-    public function processing(){
+    public function processing()
+    {
 
-        $ref = "FUND".random_int(0000,9999).date("his");
-
-
+        $ref = "FUND" . random_int(0000, 9999) . date("his");
         return view('processing', compact('ref'));
     }
 
 
-    public function stripe(request $request){
+    public function stripe(request $request)
+    {
         $amount = $request->amount;
         $email = $request->email;
 
         return view('stripe', compact('amount', 'email'));
-
-
     }
 
 
@@ -269,15 +251,6 @@ class PaymentController extends Controller
 
     public function verify_payment(request $request)
     {
-
-
-        if ($request->status == 'false') {
-
-
-            echo "Payment_declined";
-        }
-
-
 
         if ($request->status == 'true') {
 
@@ -316,35 +289,41 @@ class PaymentController extends Controller
 
 
             if ($ss == "COMPLETED") {
-                $user_id =  Transaction::where('token', $request->token)->first()->user_id ?? null;
-                User::where('id', $user_id)->increment('wallet', $order_amount);
-                Transaction::where('token', $request->token)->update([
-                    'status' => 2
-                ]);
+
+                $user_id = User::where('email', $request->email)->first()->id;
+                $currentDate = Carbon::tomorrow();
+                $expirationDate = $currentDate->addMonth();
+                $currentDateFormatted = $currentDate->toDateString();
+                $expirationDateFormatted = $expirationDate->toDateString();
 
 
-                echo "Payment_successful";
+                $plan = new MyPlan();
+                $plan->user_id = $user_id;
+                $plan->subscribe_at = Carbon::now();
+                $plan->expired_at = $expirationDateFormatted;
+                $plan->days_remaining = 0;
+                $plan->amount = $order_amount;
+                $plan->save();
 
-
-                // return response()->json([
-                //     'status' => true,
-                //     'message' => "Payment successful",
-                // ], 200);
+                $amount = $order_amount;
+                $ref = random_int(0000, 9999);
+                return view('success', compact('ref', 'amount'));
 
 
             } else {
 
-
-                echo  $status ?? "Somthingwent wrong";
-
-                // return response()->json([
-                //     'status' => false,
-                //     'message' => "$status",
-                // ], 500);
-
-
-
+                $amount = Plan::where('id', 1)->first()->amount ?? null;
+                $ref = random_int(0000, 9999);
+                return view('decline', compact('ref', 'amount'));
             }
+        }
+
+
+        if ($request->status == 'false') {
+
+            $amount = Plan::where('id', 1)->first()->amount ?? null;
+            $ref = random_int(0000, 9999);
+            return view('decline', compact('ref', 'amount'));
         }
     }
 
@@ -354,7 +333,6 @@ class PaymentController extends Controller
 
     public function payment_decline(request $request)
     {
-
 
         $ss = $request->status;
 
@@ -367,8 +345,6 @@ class PaymentController extends Controller
             $data = "Your payment was not processed, try again";
             $order_token = $request->token;
             $status = $request->status;
-
-
 
             return view('decline', compact('data', 'order_token', 'status'));
         } else {

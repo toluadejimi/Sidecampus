@@ -258,7 +258,7 @@
                     </div>
 
                     <div class="col-md-12 text-center text-white mb-5">
-                        <a href="home" class="button button1">Home</a>
+                        <a href="/transaction?status=success" class="button button1">Home</a>
                     </div>
 
 
