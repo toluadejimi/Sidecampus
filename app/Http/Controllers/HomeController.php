@@ -58,7 +58,7 @@ class HomeController extends Controller
         $data['my_plan'] = MyPlan::select('status', 'subscribe_at', 'days_remaining', 'expires_at')->where('user_id', Auth::id())->get() ?? null;
         $data['latest'] = Book::latest()->select('id', 'title', 'images', 'audio')->take(10)->get() ?? null;
         $data['collection'] = Category::select('id', 'title')->get() ?? null;
-        $data['popular'] = Book::select('id', 'title', 'author', 'description', 'images')->where('reads', '>', 10)->get() ?? null;
+        $data['popular'] = Book::select('id', 'title', 'author', 'description', 'images')->where('reads', '>', 1)->get() ?? null;
         $data['viewd'] = View::select('id', 'title', 'images')->where('user_id', Auth::id())->get() ?? null;
 
 
@@ -230,12 +230,7 @@ class HomeController extends Controller
     public function get_all_books(request $request)
     {
 
-        $books = Book::select('title', 'author', 'audio',);
-
-
-
-
-
+        $books = Book::select('title', 'category', 'author', 'audio','images', 'rating')->get();
         return response()->json([
 
             'status' => true,
@@ -243,4 +238,30 @@ class HomeController extends Controller
 
         ], 200);
     }
+
+
+    public function get_by_category(request $request)
+    {
+        $books = Book::select('title', 'author','category', 'audio','images', 'rating')->where('category', $request->category)->get();
+        return response()->json([
+            'status' => true,
+            'data' => $books
+        ], 200);
+
+
+    }
+
+
+
+    public function get_by_audio(request $request)
+    {
+        $books = Book::select('title', 'author','category', 'audio','images', 'rating')->where('audio','!=', null)->get();
+        return response()->json([
+            'status' => true,
+            'data' => $books
+        ], 200);
+
+
+    }
+
 }
