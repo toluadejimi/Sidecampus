@@ -58,7 +58,7 @@ class HomeController extends Controller
         $data['my_plan'] = MyPlan::select('status', 'subscribe_at', 'days_remaining', 'expires_at')->where('user_id', Auth::id())->get() ?? null;
         $data['latest'] = Book::latest()->select('id', 'title', 'images', 'audio')->take(10)->get() ?? null;
         $data['collection'] = Category::select('id', 'title')->get() ?? null;
-        $data['popular'] = Book::select('id', 'title', 'author', 'description', 'images')->where('reads', '>', 1)->get() ?? null;
+        $data['popular'] = Book::select('id', 'title', 'author', 'description', 'images')->where('reads', '>', 10)->get() ?? null;
         $data['viewd'] = View::select('id', 'title', 'images')->where('user_id', Auth::id())->get() ?? null;
 
 
@@ -79,7 +79,7 @@ class HomeController extends Controller
     {
 
 
-        $data['book'] = Book::select('title', 'author', 'description', 'audio', 'reads')->where('id', $request->book_id)->get();
+        $data['book'] = Book::select('title', 'author', 'description', 'audio', 'reads', 'rating')->where('id', $request->book_id)->get();
         $data['review'] = Review::select('user_profile_pics', 'rating', 'user_name', 'created_at')->where('book_id', $request->book_id)->get();
 
         $author = Book::where('id', $request->book_id)->first()->author ?? null;
