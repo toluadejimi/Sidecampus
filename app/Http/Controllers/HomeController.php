@@ -79,7 +79,7 @@ class HomeController extends Controller
     {
 
 
-        $data['book'] = Book::select('title', 'author', 'description', 'pdf', 'images', 'audio', 'reads', 'rating')->where('id', $request->book_id)->get();
+        $data['book'] = Book::select('id','title', 'author', 'description', 'pdf', 'images', 'audio', 'reads', 'rating')->where('id', $request->book_id)->get();
         $data['review'] = Review::select('user_profile_pics', 'rating', 'user_name', 'created_at')->where('book_id', $request->book_id)->get();
 
         $author = Book::where('id', $request->book_id)->first()->author ?? null;
