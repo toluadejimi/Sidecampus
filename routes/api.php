@@ -149,11 +149,11 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
 
     Route::post('search', [HomeController::class, 'search']);
 
-    Route::get('get-all-books', [HomeController::class, 'get_all_books']);
-    Route::get('get-by-category', [HomeController::class, 'get_by_category']);
-    Route::get('get-by-audio', [HomeController::class, 'get_by_audio']);
+    Route::post('get-all-books', [HomeController::class, 'get_all_books']);
+    Route::post('get-by-category', [HomeController::class, 'get_by_category']);
+    Route::post('get-by-audio', [HomeController::class, 'get_by_audio']);
 
-    
+
 
 
 
