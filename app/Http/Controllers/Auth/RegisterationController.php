@@ -172,6 +172,9 @@ class RegisterationController extends Controller
                 ]);
 
 
+
+            
+
             $user_id = User::where('email', $request->email)->first()->id;
            // $chl_plan = MyPlan::where('user_id', $user_id)->first()->user_id ?? null;
             // $data = array(

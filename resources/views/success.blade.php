@@ -16,7 +16,7 @@
 </head>
 <style>
     body {
-        background: #ffea01;
+        background: #0501ff;
         margin: 0;
         height: 100%;
 
@@ -24,7 +24,7 @@
 
     .button{
 
-        background: #ffea01;
+        background: #0501ff;
         margin: 10px auto;
         border: none;
         color: white;
@@ -120,7 +120,7 @@
         text-align: center;
         font-size: 48px;
         height: 72px;
-        background: #ffea01;
+        background: #0501ff;
         border-radius: 50%;
         width: 72px;
         height: 72px;
@@ -251,7 +251,7 @@
                         Payment Completed
                     </div>
                     <div class="success-description">
-                       Congratunlations! <br>${{ number_format($amount ?? 0, 2)  }} has been added to your main wallet,  <br><br>
+                       Congratunlations! <br>Your Monthly subscription has been successfully activated  <br><br>
                     <div class="order-details">
                         <div class="order-number-label">Transaction ID</div>
                         <div class="order-number">{{ $ref ?? "Refrence No" }}</div>
@@ -264,7 +264,7 @@
 
 
 
-                    <div class="complement text-center my-3">Thank You for choosing Gomobilez</div>
+                    <div class="complement text-center my-3">Enjoy Reading on SideCampus</div>
 
                 </div>
                 <div class="jagged-edge"></div>

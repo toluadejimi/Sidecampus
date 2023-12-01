@@ -2,30 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-use App\Models\User;
+use Stripe;
+use Carbon\Carbon;
 use App\Models\Plan;
+use App\Models\User;
 use App\Models\MyPlan;
 use GuzzleHttp\Client;
+use App\Models\PayInfo;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use Stripe;
-
-
-
-
+use PhpParser\Node\Stmt\Catch_;
+use PhpParser\Node\Stmt\TryCatch;
 
 class PaymentController extends Controller
 {
 
     public function create_order(request $request)
     {
-
-
-
-
-
 
         if ($request->vendor == 'pay_pal') {
             $token = pay_pal_token();
@@ -119,8 +113,10 @@ class PaymentController extends Controller
 
 
             $cost = Plan::where('id', 1)->first()->amount ?? null;
+
             $email = Auth::user()->email;
-            $body = url('') . "/stripe?amount=$cost&email=$email";
+            $id = Auth::user()->id;
+            $body = url('') . "/stripe?amount=$cost&email=$email&id=$id";
 
 
 
@@ -132,58 +128,229 @@ class PaymentController extends Controller
     }
 
 
+
+    public function pay_with_saved_cards(request $request)
+    {
+
+        try {
+
+            \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+            $customerId = $request->customer_id;
+
+            $stripe = \Stripe\Charge::create([
+                'amount' => $request->amount * 100,
+                'currency' => 'usd',
+                'customer' => $customerId,
+                'description' => 'Charge for Subscription',
+            ]);
+
+
+            $status = $stripe->status ?? null;
+
+
+            if ($status == 'succeeded') {
+
+
+                $amount = Plan::where('id', 1)->first()->amount ?? null;
+                $user_id = User::where('id', Auth::id())->first()->id;
+
+                $currentDate = Carbon::now();
+                $expirationDate = $currentDate->addMonth();
+
+
+                $currentDateFormatted = $currentDate->toDateString();
+                $expirationDateFormatted = $expirationDate->toDateString();
+
+
+                //dd($currentDateFormatted, $expirationDateFormatted);
+
+                $plan = new MyPlan();
+                $plan->user_id = $user_id;
+                $plan->subscribe_at = date('Y-m-d');
+                $plan->expires_at = $expirationDateFormatted;
+                $plan->days_remaining = 0;
+                $plan->status = 1;
+                $plan->amount = $amount;
+                $plan->save();
+
+
+
+                $ref = "FUND" . random_int(0000, 9999) . date("his");
+                $amount = $request->amount;
+
+
+                $trx = new Transaction();
+                $trx->type = 1;
+                $trx->amount = $amount;
+                $trx->status = 1;
+                $trx->save();
+
+
+                return response()->json([
+                    'status' => true,
+                    'message' => "Payment completed"
+                ], 200);
+
+
+            } else {
+
+                return response()->json([
+                    'status' => false,
+                    'message' => "Payment Declined"
+                ], 500);
+            }
+        } catch (\Exception $th) {
+
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
+
+
+
+
     public function charge(request $request)
     {
 
-
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $cost = Plan::where('id', 1)->first()->amount;
         $tok = $request->stripeToken;
         $final = str_replace(" ", "", $tok);
 
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        $stripe =  Stripe\Charge::create([
-            "amount" => $request->amount * 100,
-            "currency" => "USD",
-            "source" => $final,
-            "description" => "Wallet funding on Side Campus",
-        ]);
+
+
+        try {
+
+
+            if ($request->save_payinfo == 'on') {
+
+                $customer = \Stripe\Customer::create([
+                    'source' => $tok,
+                    'email' => $request->email,
+                ]);
+
+
+                $stripe = \Stripe\Charge::create([
+                    'amount' => $cost * 100,
+                    'currency' => 'usd',
+                    'customer' => $customer->id,
+                ]);
+
+
+                $ck = PayInfo::where("last4", $stripe->source->last4)->first()->last4 ?? null;
+
+                if($ck != $stripe->source->last4){
+
+
+                $pay = new PayInfo();
+                $pay->user_id = $request->id;
+                $pay->customer_id = $customer->id;
+                $pay->name = $request->name_on_card;
+                $pay->brand = $stripe->source->brand;
+                $pay->last4 = $stripe->source->last4;
+                $pay->exp_month = $stripe->source->exp_month;
+                $pay->exp_year = $stripe->source->exp_year;
+                $pay->save();
 
 
 
-        $status = $stripe->status ?? null;
-
-        if ($status == 'succeeded') {
-
-            $amount = Plan::where('id', 1)->first()->amount ?? null;
-            $user_id = User::where('email', $request->email)->first()->id;
-
-            $currentDate = Carbon::now();
-            $expirationDate = $currentDate->addMonth();
-
-
-            $currentDateFormatted = $currentDate->toDateString();
-            $expirationDateFormatted = $expirationDate->toDateString();
-
-
-            //dd($currentDateFormatted, $expirationDateFormatted);
-
-            $plan = new MyPlan();
-            $plan->user_id = $user_id;
-            $plan->subscribe_at = date('Y-m-d');
-            $plan->expires_at = $expirationDateFormatted;
-            $plan->days_remaining = 0;
-            $plan->status = 1;
-            $plan->amount = $amount;
-            $plan->save();
+                }
 
 
 
-            $ref = "FUND" . random_int(0000, 9999) . date("his");
-            $amount = $request->amount;
+                $status = $stripe->status ?? null;
 
-            return view('success', compact('ref', 'amount'));
-        } else {
+                if ($status == 'succeeded') {
 
-            return view('decline', compact('ref', 'amount'));
+                    $amount = Plan::where('id', 1)->first()->amount ?? null;
+                    $user_id = User::where('email', $request->email)->first()->id;
+
+                    $currentDate = Carbon::now();
+                    $expirationDate = $currentDate->addMonth();
+
+
+                    $currentDateFormatted = $currentDate->toDateString();
+                    $expirationDateFormatted = $expirationDate->toDateString();
+
+
+                    //dd($currentDateFormatted, $expirationDateFormatted);
+
+                    $plan = new MyPlan();
+                    $plan->user_id = $user_id;
+                    $plan->subscribe_at = date('Y-m-d');
+                    $plan->expires_at = $expirationDateFormatted;
+                    $plan->days_remaining = 0;
+                    $plan->status = 1;
+                    $plan->amount = $amount;
+                    $plan->save();
+
+
+
+                    $ref = "FUND" . random_int(0000, 9999) . date("his");
+                    $amount = $request->amount;
+
+                    return view('success', compact('ref', 'amount'));
+                } else {
+                    return view('decline', compact('ref', 'amount'));
+                }
+            }
+
+
+
+
+            $stripe = \Stripe\Charge::create([
+                'amount' => $cost * 100,
+                'currency' => 'usd',
+                'source' => $tok,
+                'description' => 'Charge for Subscription',
+            ]);
+
+
+
+
+            $status = $stripe->status ?? null;
+
+            if ($status == 'succeeded') {
+
+                $amount = Plan::where('id', 1)->first()->amount ?? null;
+                $user_id = User::where('email', $request->email)->first()->id;
+
+                $currentDate = Carbon::now();
+                $expirationDate = $currentDate->addMonth();
+
+
+                $currentDateFormatted = $currentDate->toDateString();
+                $expirationDateFormatted = $expirationDate->toDateString();
+
+
+                //dd($currentDateFormatted, $expirationDateFormatted);
+
+                $plan = new MyPlan();
+                $plan->user_id = $user_id;
+                $plan->subscribe_at = date('Y-m-d');
+                $plan->expires_at = $expirationDateFormatted;
+                $plan->days_remaining = 0;
+                $plan->status = 1;
+                $plan->amount = $amount;
+                $plan->save();
+
+
+
+                $ref = "FUND" . random_int(0000, 9999) . date("his");
+                $amount = $request->amount;
+
+                return view('success', compact('ref', 'amount'));
+            } else {
+                return view('decline', compact('ref', 'amount'));
+            }
+
+
+        } catch (\Exception $th) {
+
+            return back()->with('error', $th->getMessage());
         }
     }
 
@@ -240,8 +407,13 @@ class PaymentController extends Controller
     {
         $amount = $request->amount;
         $email = $request->email;
+        $id = $request->id;
 
-        return view('stripe', compact('amount', 'email'));
+
+        //$save_cards =
+
+
+        return view('stripe', compact('amount', 'email', 'id'));
     }
 
 
@@ -308,8 +480,6 @@ class PaymentController extends Controller
                 $amount = $order_amount;
                 $ref = random_int(0000, 9999);
                 return view('success', compact('ref', 'amount'));
-
-
             } else {
 
                 $amount = Plan::where('id', 1)->first()->amount ?? null;

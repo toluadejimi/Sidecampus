@@ -121,7 +121,7 @@ class LoginController extends Controller
             $token = auth()->user()->createToken('API Token')->accessToken;
             $myplan = MyPlan::select('status', 'subscribe_at','days_remaining','expires_at')->where('user_id', Auth::id())->first() ?? null;
             $plans = Plan::select('id','title','amount', 'period')->get() ?? null;
-            $save_cards = PayInfo::where('user_id', Auth::id())->select('customer_id', 'brand', 'last4', 'exp_month', 'exp_year', 'name')->get();
+            $save_cards = PayInfo::where('user_id', Auth::id())->select('id','customer_id', 'brand', 'last4', 'exp_month', 'exp_year', 'name')->get();
             $favorite_book = Favorite::where('user_id', Auth::id())->select('book_image', 'title', 'author', 'dexcription')->get();
 
 

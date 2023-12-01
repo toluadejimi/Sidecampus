@@ -20,7 +20,7 @@ class ProfileController extends Controller
 {
 
 
-   
+
 
 
 
@@ -28,7 +28,7 @@ class ProfileController extends Controller
     public function get_user(Request $request)
     {
 
-       
+
         $p = MyPlan::where('user_id', Auth::id())->first()->status ?? null;
         if ($p == 1) {
             $e_date = MyPlan::where('user_id', Auth::id())->first()->expires_at ?? null;
@@ -56,7 +56,7 @@ class ProfileController extends Controller
         $token = str_replace($toBeRemoved, "", $string);
         $myplan = MyPlan::select('status', 'subscribe_at','days_remaining','expires_at')->where('user_id', Auth::id())->first() ?? null;
         $user = Auth()->user();
-        $save_cards = PayInfo::where('user_id', Auth::id())->select('customer_id', 'brand', 'last4', 'exp_month', 'exp_year', 'name')->get();
+        $save_cards = PayInfo::where('user_id', Auth::id())->select('id','customer_id', 'brand', 'last4', 'exp_month', 'exp_year', 'name')->get();
         $favorite_book = Favorite::where('user_id', Auth::id())->select('book_image', 'title', 'author', 'dexcription')->get();
 
         $user['token'] = $token;
@@ -142,13 +142,32 @@ class ProfileController extends Controller
     public function delete_card(request $request)
     {
 
-        PayInfo::where('id', $request->card_id)->delete();
-        return response()->json([
+        $customer_id = PayInfo::where('id', $request->card_id)->first()->customer_id;
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-            'status' => true,
-            'message' => "Card removed successfully",
+        $customerId = $customer_id;
 
-        ], 200);
+        try {
+
+
+            $customer = \Stripe\Customer::retrieve($customerId);
+            $customer->delete();
+
+            PayInfo::where('id', $request->card_id)->delete();
+            return response()->json([
+
+                'status' => true,
+                'message' => "Card removed successfully",
+
+            ], 200);
+
+
+        } catch (\Stripe\Exception\InvalidRequestException $e) {
+            echo 'Error: ' . $e->getError()->message;
+        } catch (\Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+
 
 
     }
@@ -163,7 +182,7 @@ class ProfileController extends Controller
         $body['phone_no'] = $set->phone_no;
         $body['email'] = $set->email;
 
-        
+
             return response()->json([
                 'status' => true,
                 'data' => $body,
@@ -214,5 +233,5 @@ class ProfileController extends Controller
 
 
 
-    
+
 }

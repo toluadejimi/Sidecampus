@@ -13,7 +13,6 @@
 
 
     <style>
-
         #button2 {
             float: right;
             line-height: 12px;
@@ -22,14 +21,37 @@
             font-family: tahoma;
             margin-top: 1px;
             margin-right: 1px;
-          }
+        }
 
 
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
+            background-color: rgb(15, 7, 243);
+            font-family: 'Poppins';
+
+        }
+
+        .payment-form .products {
+            background-color: #ffffff;
+            padding: 25px;
+        }
+
+        .payment-form .form {
+            border-top: 2px solid #000;
+        }
+
+
+
+        .payment-form .card-details {
+            padding: 25px 25px 15px;
+            background-color: #ffffff;
+
+        }
+
+        .btn {
+            background-color: rgb(0 0 0);
+            border-color: black;
         }
 
         .loader {
@@ -55,7 +77,7 @@
 
         .spinner {
             border: 6px solid #f3f3f3;
-            border-top: 6px solid rgb(243, 239, 7);
+            border-top: 6px solid rgb(7, 7, 243);
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -79,7 +101,13 @@
         }
 
         p {
-            color: #737373;
+            color: #000000;
+            font-size: 12px;
+        }
+
+
+        label {
+            color: #000000;
             font-size: 12px;
         }
 
@@ -100,12 +128,67 @@
             width: auto;
         }
 
-        body {
-            font-family: 'Poppins';
+
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
         }
 
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #01070d;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
     </style>
 
 
@@ -116,8 +199,9 @@
         }, 5000); // 3 seconds
     </script>
 
-  </head>
-  <body>
+</head>
+
+<body style="padding: 0px; margin: 0px; background-color: #1100ff;">
 
     <div class="loader">
         <div class="spinner"></div>
@@ -163,135 +247,115 @@
 
 
 
-    {{-- <div class="container">
-        <div class="col-md-6 col-md-offset-3">
-            <h1>Payment Form</h1>
-            <div class="spacer"></div>
-
-            @if (session()->has('success_message'))
-            <div class="alert alert-success">
-                {{ session()->get('success_message') }}
-            </div>
-            @endif
-
-            @if(count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-            <form action="/charge" method="POST" id="payment-form">
-                @csrf
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" value="{{ $email }}" id="email">
-                </div>
-
-                <div class="form-group">
-                    <label for="name_on_card">Name on Card</label>
-                    <input type="text" class="form-control" id="name_on_card" name="name_on_card">
-                    <input type="number" hidden name="amount" value={{ $amount }}>
-                    <input type="text" hidden name="email" value={{ $email }}>
-
-
-                </div>
+    <main class="page payment-page">
 
 
 
 
+        <section class="payment-form dark">
+            <div class="container"
+                style="background-color: #000dff; max-width: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; height:100vh">
 
+                <form action="/charge" method="POST" id="payment-form" class="my-5">
+                    @csrf
 
-
-                <div class="form-group">
-                    <label for="card-element">Debit / Credit Card</label>
-                    <div id="card-element">
-                        <!-- a Stripe Element will be inserted here. -->
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-
-                    <!-- Used to display form errors -->
-                    <div id="card-errors" role="alert"></div>
-                </div>
-
-                <div class="spacer"></div>
-
-                <button type="submit" class="btn btn-success">Pay ${{ $amount }}</button>
-            </form>
-        </div>
-    </div> --}}
-
-
-
-
-
-        <main class="page payment-page">
-          <section class="payment-form dark">
-            <div class="container">
-
-              <form action="/charge" method="POST" id="payment-form" class="my-5">
-                @csrf
-                <div class="products">
-                  <h3 class="title">Pay Now</h3>
-
-                  <div class="item">
-                    <span class="price">${{ $amount }}</span>
-                    <p class="item-name">Wallet Funding</p>
-                    <p class="item-description">Instant funding</p>
-                  </div>
-                  <div class="total">Total<span class="price">${{ number_format($amount, 2) }}</span></div>
-                </div>
-
-
-
-
-                <div class="card-details">
-                  <h3 class="title">Credit Card Details</h3>
-                  <div class="row">
-                    <div class="form-group col-sm-12">
-                      <label for="email">Email Address</label>
-                      <input type="email"  disabled class="form-control" value="{{ $email }}" id="email">
+                    @endif
+                    @if (session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
                     </div>
-
-                    <div class="form-group col-sm-12">
-                        <label for="name_on_card">Name on Card</label>
-                        <input type="text" class="form-control" id="name_on_card" name="name_on_card">
-                        <input type="number" hidden name="amount" value={{ $amount }}>
-                        <input type="text" hidden name="email" value={{ $email }}>
+                    @endif
+                    @if (session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error') }}
                     </div>
+                    @endif
 
 
-                    <div class="form-group col-sm-12">
-                        <label for="card-element">Debit / Credit Card</label>
-                        <div id="card-element">
-                            <!-- a Stripe Element will be inserted here. -->
+                    <div class="products">
+                        <h3 class="title">Subscribe Now</h3>
+
+                        <div class="item">
+                            <span class="price">${{ $amount }}</span>
+                            <p class="item-name">1 Month Subscription</p>
                         </div>
-
-                        <!-- Used to display form errors -->
-                        <div id="card-errors" role="alert"></div>
+                        <div class="total">Total<span class="price">${{ number_format($amount, 2) }}</span></div>
                     </div>
 
-                    <div class="spacer"></div>
 
 
-                    <div class="form-group col-sm-12">
-                      <button type="submit" class="btn btn-primary btn-block">Pay ${{ number_format($amount) }}</button>
+
+                    <div class="card-details">
+                        <h3 class="title">Credit Card Details</h3>
+                        <div class="row">
+                            {{-- <div class="form-group col-sm-12">
+                                <label for="email">Email Address</label>
+                                <input type="email" disabled class="form-control" value="{{ $email }}" id="email">
+                            </div> --}}
+
+                            <div class="form-group col-sm-12">
+                                <label for="name_on_card">Name on Card</label>
+                                <input type="text" class="form-control" id="name_on_card" name="name_on_card">
+                                <input type="number" hidden name="amount" value={{ $amount }}>
+                                <input type="text" hidden name="email" value={{ $email }}>
+                                <input type="text" hidden name="id" value={{ $id }}>
+
+                            </div>
+
+
+                            <div class="form-group col-sm-12">
+                                <label for="card-element">Debit / Credit Card</label>
+                                <div id="card-element">
+                                    <!-- a Stripe Element will be inserted here. -->
+                                </div>
+
+                                <!-- Used to display form errors -->
+                                <div id="card-errors" role="alert"></div>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Save Card
+                                    <label class="switch">
+                                        <input type="checkbox" class="mt-1" name="save_payinfo">
+                                        <span class="slider round"></span>
+                                    </label>
+                            </div>
+                            </li>
+
+
+
+
+                            <div class="spacer"></div>
+
+
+                            <div class="form-group col-sm-12">
+                                <button type="submit" class="btn btn-primary btn-block">Pay ${{ number_format($amount)
+                                    }}</button>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </form>
+                </form>
             </div>
-          </section>
-        </main>
-      </body>
-      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        </section>
+    </main>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 
 
-    <script>
-        // Create a Stripe client
+<script>
+    // Create a Stripe client
                 var stripe = Stripe('{{ config('services.stripe.publish') }}');
 
                 // Create an instance of Elements
@@ -385,17 +449,7 @@
 
                 });
                 });
-    </script>
+</script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-

@@ -60,6 +60,9 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
 
     //Payment
     Route::post('subscribe', [PaymentController::class, 'create_order']);
+    Route::post('subscribe-with-savedcards', [PaymentController::class, 'pay_with_saved_cards']);
+
+    
     Route::post('verify-payment', [PaymentController::class, 'verify_payment']);
 
 
