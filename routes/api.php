@@ -93,7 +93,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('post', [SocialContoller::class, 'post']);
     Route::post('like-post', [SocialContoller::class, 'like']);
     Route::post('unlike-post', [SocialContoller::class, 'unlike']);
-    Route::post('delete-post', [SocialContoller::class, 'delete']);
+    Route::post('delete-post', [SocialContoller::class, 'delete_post']);
     Route::post('comment', [SocialContoller::class, 'comment']);
     Route::post('edit-comment', [SocialContoller::class, 'edit_comment']);
     Route::post('delete-comment', [SocialContoller::class, 'delete_comment']);
