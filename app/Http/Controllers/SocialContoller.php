@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use App\Models\PostLike;
 use App\Models\PostComment;
 use Illuminate\Http\Request;
@@ -12,8 +13,8 @@ class SocialContoller extends Controller
 {
 
     public function all_post(){
-        $data['all_post'] = Post::select('id', 'user_image', 'user_name', 'created_at', 'media', 'media_title', 'message', 'likes', 'comment')->latest()->pick('50')->get();
-        $data['comments'] = PostComment::select('id', 'user_id', 'post_id', 'user_name', 'comment', 'created_at')->get();
+        $data['all_post'] = Post::select('id', 'user_image', 'user_name', 'created_at', 'media', 'media_title', 'message', 'likes', 'comment')->latest()->take('50')->get();
+        $data['comments'] = Comment::select('id', 'user_id', 'post_id', 'user_name', 'comment', 'created_at')->get();
 
         return response()->json([
 
@@ -27,7 +28,9 @@ class SocialContoller extends Controller
 
     public function my_post(request $request){
 
-        $data['my_posts'] = Post::select('id', 'user_image', 'user_name', 'created_at', 'media', 'media_title', 'message', 'likes', 'comment')->latest()->where('user_id', Auth::id())->pick('50');
+        $data['my_posts'] = Post::select('id', 'user_image', 'user_name', 'created_at', 'media', 'media_title', 'message', 'likes', 'comment')->latest()->where('user_id', Auth::id())->take('50')->get();
+        $data['comments'] = Comment::select('id', 'user_id', 'post_id', 'user_name', 'comment', 'created_at')->get();
+
         return response()->json([
             'status' => true,
             'posts' => $data,
@@ -42,10 +45,9 @@ class SocialContoller extends Controller
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
             $destinationPath = public_path() . 'post/media';
-            $request->photo->move(public_path('post/media'), $fileName);
+            $request->file->move(public_path('post/media'), $fileName);
             $file_url = url('') . "/public/post/media/$fileName";
         }
-
 
         $post = new Post();
         $post->user_id = Auth::id();
@@ -94,15 +96,65 @@ class SocialContoller extends Controller
     }
 
 
-    public function comment(request $request){
 
+    public function delete_post(request $request){
 
-
-        Post::where('id', $request->post_id)->update('likes', 1);
+        Post::where('id', $request->post_id)->delete();
         return response()->json([
 
             'status' => true,
-            'message' => "You unlike the post",
+            'message' => "Post Deleted Successfully",
+
+        ], 200);
+
+    }
+
+
+    public function comment(request $request){
+
+        $comm = new Comment();
+        $comm->post_id =$request->post_id;
+        $comm->user_id =Auth::id();
+        $comm->user_name = Auth::user()->first_name." ".Auth::user()->last_name;
+        $comm->comment =$request->comment;
+        $comm->save();
+
+        Post::where('id', $request->post_id)->increment('comment', 1);
+
+
+        return response()->json([
+
+            'status' => true,
+            'message' => "Comment saved successfully",
+
+        ], 200);
+
+    }
+
+
+
+    public function edit_comment(request $request){
+
+        Comment::where('id', $request->comment_id)->update(['comment' => $request->comment]);
+        return response()->json([
+
+            'status' => true,
+            'message' => "Comment updated successfully",
+
+        ], 200);
+
+    }
+
+
+    public function delete_comment(request $request){
+
+        Comment::where('id', $request->comment_id)->delete();
+        Post::where('id', $request->post_id)->decrement('comment', 1);
+
+        return response()->json([
+
+            'status' => true,
+            'message' => "Comment deleted successfully",
 
         ], 200);
 

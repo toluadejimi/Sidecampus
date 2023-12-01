@@ -131,8 +131,13 @@ class HomeController extends Controller
     public function add_favorite(request $request)
     {
 
+        $book = Book::where('id', $request->book_id)->first();
         $fav =  new Favorite();
         $fav->book_id = $request->book_id;
+        $fav->book_image = $book->images;
+        $fav->title = $book->title;
+        $fav->dexcription = $book->description;
+        $fav->author = $book->author;
         $fav->user_id = Auth::id();
         $fav->save();
 
@@ -169,6 +174,26 @@ class HomeController extends Controller
 
             'status' => true,
             'message' => "Review Successfully Added"
+
+        ], 200);
+    }
+
+
+
+    public function edit_review(request $request)
+    {
+
+
+        Review::where('id', $request->review_id)->update([
+            'comment', $request->comment,
+            'rating', $request->rating,
+        
+        ]);
+
+        return response()->json([
+
+            'status' => true,
+            'message' => "Review updated successfully"
 
         ], 200);
     }

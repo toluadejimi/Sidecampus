@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\ApiKey;
-use App\Models\Feature;
-use App\Models\MyPhoneNumber;
-use App\Models\MyPlan;
-use App\Models\OauthAccessToken;
-use App\Models\Plan;
-use App\Models\Setting;
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\Plan;
+use App\Models\User;
+use App\Models\ApiKey;
+use App\Models\MyPlan;
+use App\Models\Feature;
+use App\Models\PayInfo;
+use App\Models\Setting;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
+use App\Models\MyPhoneNumber;
+use Laravel\Passport\Passport;
+use App\Models\OauthAccessToken;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Passport\Passport;
 
 class LoginController extends Controller
 {
@@ -85,13 +87,9 @@ class LoginController extends Controller
 
 
         if (Auth::user()->status == 5) {
-
-
             return response()->json([
-
                 'status' => $this->failed,
                 'message' => 'You can not login at the moment, Please contact  support',
-
             ], 401);
         }
 
@@ -123,9 +121,15 @@ class LoginController extends Controller
             $token = auth()->user()->createToken('API Token')->accessToken;
             $myplan = MyPlan::select('status', 'subscribe_at','days_remaining','expires_at')->where('user_id', Auth::id())->first() ?? null;
             $plans = Plan::select('id','title','amount', 'period')->get() ?? null;
+            $save_cards = PayInfo::where('user_id', Auth::id())->select('customer_id', 'brand', 'last4', 'exp_month', 'exp_year', 'name')->get();
+            $favorite_book = Favorite::where('user_id', Auth::id())->select('book_image', 'title', 'author', 'dexcription')->get();
+
+
             $user = Auth()->user();
             $user['token'] = $token;
-            $user['my_plan'] = $myplan;
+            $user['saved_card'] = $save_cards;
+            $user['favorite_book'] = $favorite_book;
+
 
 
             return response()->json([
