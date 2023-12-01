@@ -139,6 +139,22 @@ class ProfileController extends Controller
 
 
 
+    public function delete_card(request $request)
+    {
+
+        PayInfo::where('id', $request->card_id)->delete();
+        return response()->json([
+
+            'status' => true,
+            'message' => "Card removed successfully",
+
+        ], 200);
+
+
+    }
+
+
+
     public function contact_us(Request $request)
     {
 
