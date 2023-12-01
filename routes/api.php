@@ -106,7 +106,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('delete-account', [ProfileController::class, 'delete_account']);
     Route::get('contact-us', [ProfileController::class, 'contact_us']);
     Route::get('legal', [ProfileController::class, 'legal']);
-    Route::get('delete-card', [ProfileController::class, 'delete_card']);
+    Route::post('delete-card', [ProfileController::class, 'delete_card']);
 
 
 
