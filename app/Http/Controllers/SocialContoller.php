@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\PostLike;
 use App\Models\PostComment;
+use App\Models\SubComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -101,7 +102,6 @@ class SocialContoller extends Controller
         $data['post'] = Post::select('id', 'user_image', 'user_name', 'created_at', 'media', 'media_title', 'message', 'likes', 'comment')->where('id', $request->post_id)->get();
         $data['comment'] = Comment::select('id', 'user_id', 'post_id', 'user_image', 'user_name', 'comment', 'created_at')->latest()->where('post_id', $request->post_id)->get();
 
-
         return response()->json([
 
             'status' => true,
@@ -109,6 +109,27 @@ class SocialContoller extends Controller
 
         ], 200);
     }
+
+
+
+    public function open_comment(request $request)
+    {
+
+
+        $data['comment'] = Comment::select('id', 'user_image', 'user_name', 'created_at', 'comment', 'comment_count')
+        ->where('id', $request->comment_id)->get();
+        $data['sub_comment'] = SubComment::select('id', 'user_id', 'user_image', 'user_name', 'comment', 'created_at')->latest()->where('comment_id', $request->comment_id)->get();
+
+        return response()->json([
+
+            'status' => true,
+            'data' => $data,
+
+        ], 200);
+
+        
+    }
+
 
 
     public function unlike(request $request)
@@ -188,4 +209,29 @@ class SocialContoller extends Controller
 
         ], 200);
     }
+
+
+    public function post_sub_comment(request $request)
+    {
+
+        $comm = new SubComment();
+        $comm->post_id = $request->post_id;
+        $comm->comment_id = $request->comment_id;
+        $comm->user_id = Auth::id();
+        $comm->user_name = Auth::user()->first_name . " " . Auth::user()->last_name;
+        $comm->user_image = Auth::user()->image;
+        $comm->comment = $request->comment;
+        $comm->save();
+
+        Comment::where('id', $request->comment_id)->increment('comment_count', 1);
+
+
+        return response()->json([
+
+            'status' => true,
+            'message' => "Comment posted successfully",
+
+        ], 200);
+    }
+
 }

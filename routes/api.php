@@ -101,6 +101,10 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('edit-comment', [SocialContoller::class, 'edit_comment']);
     Route::post('delete-comment', [SocialContoller::class, 'delete_comment']);
     Route::post('open-post', [SocialContoller::class, 'open_post']);
+    Route::post('open-comment', [SocialContoller::class, 'open_comment']);
+    Route::post('post-sub-comment', [SocialContoller::class, 'post_sub_comment']);
+
+
 
 
 
