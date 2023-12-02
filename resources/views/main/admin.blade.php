@@ -4,17 +4,17 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Booksto - Responsive Bootstrap 4 Admin Dashboard Template</title>
+      <title>Side Campus - Responsive Bootstrap 4 Admin Dashboard Template</title>
       <!-- Favicon -->
-      <link rel="shortcut icon" href="images/favicon.ico" />
+      <link rel="shortcut icon" href="{{ url('') }}/public/assets/images/favicon.ico" />
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="{{ url('') }}/public/assets/css/bootstrap.min.css">
       <!-- Typography CSS -->
-      <link rel="stylesheet" href="css/typography.css">
+      <link rel="stylesheet" href="{{ url('') }}/public/assets/css/typography.css">
       <!-- Style CSS -->
-      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="{{ url('') }}/public/assets/css/style.css">
       <!-- Responsive CSS -->
-      <link rel="stylesheet" href="css/responsive.css">
+      <link rel="stylesheet" href="{{ url('') }}/public/assets/css/responsive.css">
    </head>
    <body>
       <!-- loader Start -->
@@ -31,7 +31,7 @@
                <a href="index.html" class="header-logo">
                   <img src="images/logo.png" class="img-fluid rounded-normal" alt="">
                   <div class="logo-title">
-                     <span class="text-primary text-uppercase">Booksto</span>
+                     <span class="text-primary text-uppercase">Side Campus</span>
                   </div>
                </a>
                <div class="iq-menu-bt-sidebar">
@@ -46,158 +46,17 @@
                <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li>
-                        <a href="admin-dashboard.html#dashboard" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Shop</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li class="active"><a href="index.html"><i class="las la-house-damage"></i>Home Page</a></li>
-                           <li><a href="category.html"><i class="ri-function-line"></i>Category Page</a></li>
-                           <li><a href="book-page.html"><i class="ri-book-line"></i>Book Page</a></li>
-                           <li><a href="book-pdf.html"><i class="ri-file-pdf-line"></i>Book PDF</a></li>
-                           <li><a href="Checkout.html"><i class="ri-checkbox-multiple-blank-line"></i>Checkout</a></li>
-                          <li><a href="wishlist.html"><i class="ri-heart-line"></i>wishlist</a></li>
-                        </ul>
-                     </li>
+                       
                      <li class="active active-menu">
                         <a href="admin-dashboard.html#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Admin</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="admin" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
                            <li class="active"><a href="admin-dashboard.html"><i class="las la-house-damage"></i>Dashboard</a></li>
                            <li><a href="admin-category.html"><i class="ri-function-line"></i>Books Category</a></li>
                            <li><a href="admin-author.html"><i class="ri-book-line"></i>Author</a></li>
-                           <li><a href="admin-books.html"><i class="ri-file-pdf-line"></i>Books</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="admin-dashboard.html#userinfo" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>User</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
-                           <li><a href="profile.html"><i class="las la-id-card-alt"></i>User Profile</a></li>
-                           <li><a href="profile-edit.html"><i class="las la-edit"></i>User Edit</a></li>
-                           <li><a href="add-user.html"><i class="las la-plus-circle"></i>User Add</a></li>
-                           <li><a href="user-list.html"><i class="las la-th-list"></i>User List</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="admin-dashboard.html#ui-elements" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-elementor iq-arrow-left"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="ui-elements" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li class="elements">
-                              <a href="admin-dashboard.html#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>UI Kit</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                              <ul id="sub-menu" class="iq-submenu collapse" data-parent="#ui-elements">
-                                 <li><a href="ui-colors.html"><i class="las la-palette"></i>colors</a></li>
-                                 <li><a href="ui-typography.html"><i class="las la-keyboard"></i>Typography</a></li>
-                                 <li><a href="ui-alerts.html"><i class="las la-tag"></i>Alerts</a></li>
-                                 <li><a href="ui-badges.html"><i class="lab la-atlassian"></i>Badges</a></li>
-                                 <li><a href="ui-breadcrumb.html"><i class="las la-bars"></i>Breadcrumb</a></li>
-                                 <li><a href="ui-buttons.html"><i class="las la-tablet"></i>Buttons</a></li>
-                                 <li><a href="ui-cards.html"><i class="las la-credit-card"></i>Cards</a></li>
-                                 <li><a href="ui-carousel.html"><i class="las la-film"></i>Carousel</a></li>
-                                 <li><a href="ui-embed-video.html"><i class="las la-video"></i>Video</a></li>
-                                 <li><a href="ui-grid.html"><i class="las la-border-all"></i>Grid</a></li>
-                                 <li><a href="ui-images.html"><i class="las la-images"></i>Images</a></li>
-                                 <li><a href="ui-list-group.html"><i class="las la-list"></i>list Group</a></li>
-                                 <li><a href="ui-media-object.html"><i class="las la-ad"></i>Media</a></li>
-                                 <li><a href="ui-modal.html"><i class="las la-columns"></i>Modal</a></li>
-                                 <li><a href="ui-notifications.html"><i class="las la-bell"></i>Notifications</a></li>
-                                 <li><a href="ui-pagination.html"><i class="las la-ellipsis-h"></i>Pagination</a></li>
-                                 <li><a href="ui-popovers.html"><i class="las la-eraser"></i>Popovers</a></li>
-                                 <li><a href="ui-progressbars.html"><i class="las la-hdd"></i>Progressbars</a></li>
-                                 <li><a href="ui-tabs.html"><i class="las la-database"></i>Tabs</a></li>
-                                 <li><a href="ui-tooltips.html"><i class="las la-magnet"></i>Tooltips</a></li>
-                              </ul>
-                           </li>
-                           <li class="form">
-                              <a href="admin-dashboard.html#forms" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-wpforms"></i><span>Forms</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                              <ul id="forms" class="iq-submenu collapse" data-parent="#ui-elements">
-                                 <li><a href="form-layout.html"><i class="las la-book"></i>Form Elements</a></li>
-                                 <li><a href="form-validation.html"><i class="las la-edit"></i>Form Validation</a></li>
-                                 <li><a href="form-switch.html"><i class="las la-toggle-off"></i>Form Switch</a></li>
-                                 <li><a href="form-chechbox.html"><i class="las la-check-square"></i>Form Checkbox</a></li>
-                                 <li><a href="form-radio.html"><i class="ri-radio-button-line"></i>Form Radio</a></li>
-                              </ul>
-                           </li>
-                           <li>
-                              <a href="admin-dashboard.html#wizard-form" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-archive-drawer-line"></i><span>Forms Wizard</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                              <ul id="wizard-form" class="iq-submenu collapse" data-parent="#ui-elements">
-                                 <li><a href="form-wizard.html"><i class="ri-clockwise-line"></i>Simple Wizard</a></li>
-                                 <li><a href="form-wizard-validate.html"><i class="ri-clockwise-2-line"></i>Validate Wizard</a></li>
-                                 <li><a href="form-wizard-vertical.html"><i class="ri-anticlockwise-line"></i>Vertical Wizard</a></li>
-                              </ul>
-                           </li>
-                           <li>
-                              <a href="admin-dashboard.html#tables" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-table-line"></i><span>Table</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                              <ul id="tables" class="iq-submenu collapse" data-parent="#ui-elements">
-                                 <li><a href="tables-basic.html"><i class="ri-table-line"></i>Basic Tables</a></li>
-                                 <li><a href="data-table.html"><i class="ri-database-line"></i>Data Table</a></li>
-                                 <li><a href="table-editable.html"><i class="ri-refund-line"></i>Editable Table</a></li>
-                              </ul>
-                           </li>
-                           <li>
-                              <a href="admin-dashboard.html#charts" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pie-chart-box-line"></i><span>Charts</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                              <ul id="charts" class="iq-submenu collapse" data-parent="#ui-elements">
-                                 <li><a href="chart-morris.html"><i class="ri-file-chart-line"></i>Morris Chart</a></li>
-                                 <li><a href="chart-high.html"><i class="ri-bar-chart-line"></i>High Charts</a></li>
-                                 <li><a href="chart-am.html"><i class="ri-folder-chart-line"></i>Am Charts</a></li>
-                                 <li><a href="chart-apex.html"><i class="ri-folder-chart-2-line"></i>Apex Chart</a></li>
-                              </ul>
-                           </li>
-                           <li>
-                              <a href="admin-dashboard.html#icons" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-list-check"></i><span>Icons</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                              <ul id="icons" class="iq-submenu collapse" data-parent="#ui-elements">
-                                 <li><a href="icon-dripicons.html"><i class="ri-stack-line"></i>Dripicons</a></li>
-                                 <li><a href="icon-fontawesome-5.html"><i class="ri-facebook-fill"></i>Font Awesome 5</a></li>
-                                 <li><a href="icon-lineawesome.html"><i class="ri-keynote-line"></i>line Awesome</a></li>
-                                 <li><a href="icon-remixicon.html"><i class="ri-remixicon-line"></i>Remixicon</a></li>
-                                 <li><a href="icon-unicons.html"><i class="ri-underline"></i>unicons</a></li>
-                              </ul>
-                           </li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="admin-dashboard.html#pages" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-file-alt iq-arrow-left"></i><span>Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="pages" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li>
-                              <a href="admin-dashboard.html#authentication" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pages-line"></i><span>Authentication</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                              <ul id="authentication" class="iq-submenu collapse" data-parent="#pages">
-                                 <li><a href="sign-in.html"><i class="las la-sign-in-alt"></i>Login</a></li>
-                                 <li><a href="sign-up.html"><i class="ri-login-circle-line"></i>Register</a></li>
-                                 <li><a href="pages-recoverpw.html"><i class="ri-record-mail-line"></i>Recover Password</a></li>
-                                 <li><a href="pages-confirm-mail.html"><i class="ri-file-code-line"></i>Confirm Mail</a></li>
-                                 <li><a href="pages-lock-screen.html"><i class="ri-lock-line"></i>Lock Screen</a></li>
-                              </ul>
-                           </li>
-                           <li>
-                              <a href="admin-dashboard.html#extra-pages" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pantone-line"></i><span>Extra Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                              <ul id="extra-pages" class="iq-submenu collapse" data-parent="#pages">
-                                 <li><a href="pages-timeline.html"><i class="ri-map-pin-time-line"></i>Timeline</a></li>
-                                 <li><a href="pages-invoice.html"><i class="ri-question-answer-line"></i>Invoice</a></li>
-                                 <li><a href="blank-page.html"><i class="ri-invision-line"></i>Blank Page</a></li>
-                                 <li><a href="pages-error.html"><i class="ri-error-warning-line"></i>Error 404</a></li>
-                                 <li><a href="pages-error-500.html"><i class="ri-error-warning-line"></i>Error 500</a></li>
-                                 <li><a href="pages-pricing.html"><i class="ri-price-tag-line"></i>Pricing</a></li>
-                                 <li><a href="https://templates.iqonic.design/booksto/html/pages-pricing-one.html"><i class="ri-price-tag-2-line"></i>Pricing 1</a></li>
-                                 <li><a href="pages-maintenance.html"><i class="ri-archive-line"></i>Maintenance</a></li>
-                                 <li><a href="pages-comingsoon.html"><i class="ri-mastercard-line"></i>Coming Soon</a></li>
-                                 <li><a href="pages-faq.html"><i class="ri-compasses-line"></i>Faq</a></li>
-                              </ul>
-                           </li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="admin-dashboard.html#menu-level" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-record-circle-line iq-arrow-left"></i><span>Menu Level</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="menu-level" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="admin-dashboard.html#"><i class="ri-record-circle-line"></i>Menu 1</a></li>
-                           <li>
-                              <a href="admin-dashboard.html#"><i class="ri-record-circle-line"></i>Menu 2</a>
-                              <ul>
-                                 <li class="menu-level">
-                                    <a href="admin-dashboard.html#sub-menus" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>Sub-menu</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                                    <ul id="sub-menus" class="iq-submenu iq-submenu-data collapse">
-                                       <li><a href="admin-dashboard.html#"><i class="ri-record-circle-line"></i>Sub-menu 1</a></li>
-                                       <li><a href="admin-dashboard.html#"><i class="ri-record-circle-line"></i>Sub-menu 2</a></li>
-                                       <li><a href="admin-dashboard.html#"><i class="ri-record-circle-line"></i>Sub-menu 3</a></li>
-                                    </ul>
-                                 </li>
-                              </ul>
-                           </li>
-                           <li><a href="admin-dashboard.html#"><i class="ri-record-circle-line"></i>Menu 3</a></li>
-                           <li><a href="admin-dashboard.html#"><i class="ri-record-circle-line"></i>Menu 4</a></li>
+                           <li><a href="book-list"><i class="ri-file-pdf-line"></i>Books</a></li>
+                           <li><a href="admin-books.html"><i class="ri-user-line"></i>Users</a></li>
+                           <li><a href="admin-books.html"><i class="ri-settings-line"></i>Settings</a></li>
+
                         </ul>
                      </li>
                   </ul>
@@ -206,8 +65,7 @@
                   <div class="iq-card">
                      <div class="iq-card-body">
                         <div class="sidebarbottom-content">
-                           <div class="image"><img src="images/page-img/side-bkg.png" alt=""></div>                           
-                           <button type="submit" class="btn w-100 btn-primary mt-4 view-more">Become Membership</button>
+                           <button type="submit" class="btn w-100 btn-primary mt-4 view-more">Log Out</button>
                         </div>
                      </div>
                   </div>
@@ -224,9 +82,9 @@
                      </div>
                      <div class="iq-navbar-logo d-flex justify-content-between">
                         <a href="index.html" class="header-logo">
-                           <img src="images/logo.png" class="img-fluid rounded-normal" alt="">
+                           <img src="{{ url('') }}/public/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
                            <div class="logo-title">
-                              <span class="text-primary text-uppercase">Booksto</span>
+                              <span class="text-primary text-uppercase">Side Campus</span>
                            </div>
                         </a>
                      </div>
@@ -541,11 +399,11 @@
                   <div class="col-lg-6">
                      <ul class="list-inline mb-0">
                         <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                        <li class="list-inline-item"><a href="terms-of-service.html">Terms of Uses</a></li>
                      </ul>
                   </div>
                   <div class="col-lg-6 text-right">
-                     Copyright 2020 <a href="index.html#">Booksto</a> All Rights Reserved.
+                     Copyright 2020 <a href="index.html">Side Campus</a> All Rights Reserved.
                   </div>
                </div>
             </div>
@@ -555,61 +413,61 @@
       
    
    
-         
-         <!-- color-customizer END -->
-         <!-- Optional JavaScript -->
-         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-         <script src="{{ url('') }}/public/assets/js/jquery.min.js"></script>
-         <script src="{{ url('') }}/public/assets/js/popper.min.js"></script>
-         <script src="{{ url('') }}/public/assets/js/bootstrap.min.js"></script>
-         <!-- Appear JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/jquery.appear.js"></script>
-         <!-- Countdown JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/countdown.min.js"></script>
-         <!-- Counterup JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/waypoints.min.js"></script>
-         <script src="{{ url('') }}/public/assets/js/jquery.counterup.min.js"></script>
-         <!-- Wow JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/wow.min.js"></script>
-         <!-- Apexcharts JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/apexcharts.js"></script>
-         <!-- Slick JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/slick.min.js"></script>
-         <!-- Select2 JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/select2.min.js"></script>
-         <!-- Owl Carousel JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/owl.carousel.min.js"></script>
-         <!-- Magnific Popup JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/jquery.magnific-popup.min.js"></script>
-         <!-- Smooth Scrollbar JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/smooth-scrollbar.js"></script>
-         <!-- lottie JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/lottie.js"></script>
-         <!-- am core JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/core.js"></script>
-         <!-- am charts JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/charts.js"></script>
-         <!-- am animated JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/animated.js"></script>
-         <!-- am kelly JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/kelly.js"></script>
-         <!-- am maps JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/maps.js"></script>
-         <!-- am worldLow JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/worldLow.js"></script>
-         <!-- Raphael-min JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/raphael-min.js"></script>
-         <!-- Morris JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/morris.js"></script>
-         <!-- Morris min JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/morris.min.js"></script>
-         <!-- Flatpicker Js -->
-         <script src="{{ url('') }}/public/assets/js/flatpickr.js"></script>
-         <!-- Style Customizer -->
-         <script src="{{ url('') }}/public/assets/js/style-customizer.js"></script>
-         <!-- Chart Custom JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/chart-custom.js"></script>
-         <!-- Custom JavaScript -->
-         <script src="{{ url('') }}/public/assets/js/custom.js"></script>
+
+      
+    <script src="{{ url('') }}/public/assets/js/jquery.min.js"></script>
+      <script src="{{ url('') }}/public/assets/js/popper.min.js"></script>
+      <script src="{{ url('') }}/public/assets/js/bootstrap.min.js"></script>
+      <script src="{{ url('') }}/public/assets/js/jquery.dataTables.min.js"></script>
+      <script src="{{ url('') }}/public/assets/js/dataTables.bootstrap4.min.js"></script>
+      <!-- Appear JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/jquery.appear.js"></script>
+      <!-- Countdown JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/countdown.min.js"></script>
+      <!-- Counterup JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/waypoints.min.js"></script>
+      <script src="{{ url('') }}/public/assets/js/jquery.counterup.min.js"></script>
+      <!-- Wow JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/wow.min.js"></script>
+      <!-- Apexcharts JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/apexcharts.js"></script>
+      <!-- Slick JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/slick.min.js"></script>
+      <!-- Select2 JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/select2.min.js"></script>
+      <!-- Owl Carousel JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/owl.carousel.min.js"></script>
+      <!-- Magnific Popup JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/jquery.magnific-popup.min.js"></script>
+      <!-- Smooth Scrollbar JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/smooth-scrollbar.js"></script>
+      <!-- lottie JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/lottie.js"></script>
+      <!-- am core JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/core.js"></script>
+      <!-- am charts JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/charts.js"></script>
+      <!-- am animated JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/animated.js"></script>
+      <!-- am kelly JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/kelly.js"></script>
+      <!-- am maps JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/maps.js"></script>
+      <!-- am worldLow JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/worldLow.js"></script>
+      <!-- Raphael-min JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/raphael-min.js"></script>
+      <!-- Morris JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/morris.js"></script>
+      <!-- Morris min JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/morris.min.js"></script>
+      <!-- Flatpicker Js -->
+      <script src="{{ url('') }}/public/assets/js/flatpickr.js"></script>
+      <!-- Style Customizer -->
+      <script src="{{ url('') }}/public/assets/js/style-customizer.js"></script>
+      <!-- Chart Custom JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/chart-custom.js"></script>
+      <!-- Custom JavaScript -->
+      <script src="{{ url('') }}/public/assets/js/custom.js"></script>
       </body>
    </html>

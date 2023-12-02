@@ -1,13 +1,14 @@
 <?php
 
-use App\Events\RealTimeMessage;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\VoiceController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\ProfileController;
 use App\Events\NewMessage;
+use App\Events\RealTimeMessage;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\VoiceController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Web\WelcomeController;
+use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Web\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ use App\Http\Controllers\Web\WelcomeController;
 
 
 Route::get('/', [WelcomeController::class, 'index']);
+Route::get('admin', [AdminController::class, 'index']);
+Route::get('book-list', [AdminController::class, 'booklist']);
+
+
 
 
 

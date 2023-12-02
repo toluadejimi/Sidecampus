@@ -53,4 +53,10 @@ class User extends Authenticatable
 
 
     ];
+
+
+    public function plan()
+    {
+        return $this->hasMany('App\Models\MyPlan','user_id');
+    }
 }

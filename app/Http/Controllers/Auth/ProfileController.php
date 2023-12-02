@@ -54,6 +54,8 @@ class ProfileController extends Controller
         $string = $GetToken;
         $toBeRemoved = "Bearer ";
         $token = str_replace($toBeRemoved, "", $string);
+        $plans = Plan::select('id','title','amount', 'period')->get() ?? null;
+
         $myplan = MyPlan::select('status', 'subscribe_at','days_remaining','expires_at')->where('user_id', Auth::id())->first() ?? null;
         $user = Auth()->user();
         $save_cards = PayInfo::where('user_id', Auth::id())->select('id','customer_id', 'brand', 'last4', 'exp_month', 'exp_year', 'name')->get();
@@ -71,6 +73,8 @@ class ProfileController extends Controller
         return response()->json([
             'status' => true,
             'data' => $user,
+            'plans'=> $plans
+
         ], 200);
 
     }

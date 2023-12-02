@@ -16,4 +16,10 @@ class MyPlan extends Model
         'days_remaining',
         'expires_at'
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
 }
