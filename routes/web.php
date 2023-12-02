@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Events\NewMessage;
 use App\Http\Controllers\TestController;
-
+use App\Http\Controllers\Web\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,16 +21,13 @@ use App\Http\Controllers\TestController;
 */
 
 
+Route::get('/', [WelcomeController::class, 'index']);
 
 
 
-Route::get('/t', function () {
-
-    event(new \App\Events\SendMessage());
-
-    dd('Event Run Successfully.');
-
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
@@ -65,7 +62,7 @@ Route::post('call', [VoiceController::class, 'initiateCall']);
 
 
 // After
-//Route::get('/dialer', \App\Http\Livewire\Dialer::class);  
+//Route::get('/dialer', \App\Http\Livewire\Dialer::class);
 
 
 
