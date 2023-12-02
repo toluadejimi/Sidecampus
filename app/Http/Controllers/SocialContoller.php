@@ -30,7 +30,6 @@ class SocialContoller extends Controller
         ], 200);
     }
 
-
     public function my_post($batchNumber)
     {
         $perPage = 10;
