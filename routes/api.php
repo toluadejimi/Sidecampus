@@ -91,8 +91,8 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
 
 
     //Community
-    Route::get('all-post', [SocialContoller::class, 'all_post']);
-    Route::get('my-post', [SocialContoller::class, 'my_post']);
+    Route::get('all-post/{batchNumber}', [SocialContoller::class, 'all_post']);
+    Route::get('my-post/{batchNumber}', [SocialContoller::class, 'my_post']);
     Route::post('post', [SocialContoller::class, 'post']);
     Route::post('like-post', [SocialContoller::class, 'like']);
     Route::post('unlike-post', [SocialContoller::class, 'unlike']);
@@ -100,6 +100,9 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::post('comment', [SocialContoller::class, 'comment']);
     Route::post('edit-comment', [SocialContoller::class, 'edit_comment']);
     Route::post('delete-comment', [SocialContoller::class, 'delete_comment']);
+    Route::post('open-post', [SocialContoller::class, 'open_post']);
+
+
 
 
     //Profile
@@ -110,6 +113,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('contact-us', [ProfileController::class, 'contact_us']);
     Route::get('legal', [ProfileController::class, 'legal']);
     Route::post('delete-card', [ProfileController::class, 'delete_card']);
+
 
 
 
