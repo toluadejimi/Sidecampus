@@ -55,29 +55,45 @@ class SocialContoller extends Controller
     public function post(request $request)
     {
 
-        if ($request->hasFile('file')) {
+
+        if ($request->file != null) {
+
+
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
             $destinationPath = public_path() . 'post/media';
             $request->file->move(public_path('post/media'), $fileName);
             $file_url = url('') . "/public/post/media/$fileName";
+
+
+            $post = new Post();
+            $post->user_id = Auth::id();
+            $post->message = $request->message;
+            $post->user_name = Auth::user()->first_name . " " . Auth::user()->last_name;
+            $post->user_image = Auth::user()->image;
+            $post->media_title = $request->media_title;
+            $post->media = $file_url;
+            $post->save();
+
+            return response()->json([
+
+                'status' => true,
+                'message' => "Post successful",
+    
+            ], 200);
+
         }
 
-        $post = new Post();
-        $post->user_id = Auth::id();
-        $post->message = $request->message;
-        $post->user_name = Auth::user()->first_name . " " . Auth::user()->last_name;
-        $post->user_image = Auth::user()->image;
-        $post->media_title = $request->media_title;
-        $post->media = $file_url;
-        $post->save();
 
         return response()->json([
 
-            'status' => true,
-            'message' => "Post successful",
+            'status' => false,
+            'message' => "Something Went Wrong",
 
-        ], 200);
+        ], 500);
+
+
+       
     }
 
 

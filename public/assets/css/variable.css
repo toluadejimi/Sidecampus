@@ -4,13 +4,13 @@
   --iq-title-text: #11141b;
   --iq-body-text: #777D74;
   --iq-body-bg : #fbfcff;
-  --iq-primary: #0dd6b8;
+  --iq-primary: #0d14d6;
   --iq-secondary: #a09e9e;
   --iq-success: #49f0d3;
   --iq-warning: #ffba68;
   --iq-danger: #ff9b8a;
   --iq-info: #d592ff;
-  --iq-dark: #3f414d;
+  --iq-dark: #bababa;
   --iq-light: #fafafb;
   --iq-white: #ffffff;
   --iq-black: #000000;
@@ -34,11 +34,11 @@
   --iq-border-light: #f1f1f1;
   --iq-border-danger: #ff9273;
   --iq-light-card: #ffffff;
-  --iq-primary-rgb: 100, 114, 248;
+  --iq-primary-rgb: 26, 0, 213;
   --iq-primary-light: #f3fffe;
   /* color for customizer*/
   --iq-color1: #4e37b2;
-  --iq-color2: #02d871;
+  --iq-color2: #0d14d6;
   --iq-color3: #309cf3;
   --iq-color4: #ff00ff;
   --iq-color5: #fb1f4c;
@@ -47,7 +47,7 @@
   --iq-color8: #fde117;
   --iq-color9: #ff0000;
   --iq-color10: #88028c;
-  --iq-color11: #00d5ab;
+  --iq-color11: #3c00d5;
   --iq-color12: #ce9252;
   --iq-color13: #f9ae02;
   --iq-color14: #1e7fe4;

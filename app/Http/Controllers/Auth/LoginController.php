@@ -32,9 +32,6 @@ class LoginController extends Controller
     public function login(Request $request)
     {
 
-
-
-
         $email = $request->email;
         $credentials = request(['email', 'password']);
 

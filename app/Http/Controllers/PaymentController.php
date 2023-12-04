@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\Plan;
 use App\Models\User;
 use App\Models\MyPlan;
+use App\Models\Setting;
 use GuzzleHttp\Client;
 use App\Models\PayInfo;
 use App\Models\Transaction;
@@ -134,7 +135,9 @@ class PaymentController extends Controller
 
         try {
 
-            \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+            $stripe_key = Setting::where('id', 1)->first()->stripe_s;
+            \Stripe\Stripe::setApiKey($stripe_key);
+    
             $customerId = $request->customer_id;
 
             $stripe = \Stripe\Charge::create([
@@ -215,11 +218,11 @@ class PaymentController extends Controller
     public function charge(request $request)
     {
 
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $stripe_key = Setting::where('id', 1)->first()->stripe_s;
+        \Stripe\Stripe::setApiKey($stripe_key);
         $cost = Plan::where('id', 1)->first()->amount;
         $tok = $request->stripeToken;
         $final = str_replace(" ", "", $tok);
-
 
 
         try {
@@ -427,7 +430,6 @@ class PaymentController extends Controller
         if ($request->status == 'true') {
 
             $token = pay_pal_token();
-
             $curl = curl_init();
 
             curl_setopt_array($curl, array(

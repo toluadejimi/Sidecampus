@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VoiceGrant;
@@ -39,54 +40,18 @@ function send_notification($message)
 
 
 
-function generateAccessToken(Request $request)
-{
-    $twilioAccountSid = getenv('TWILIO_ACCOUNT_SID');
-    $twilioApiKey = getenv('TWILIO_API_KEY');
-    $twilioApiSecret = getenv('TWILIO_API_KEY_SECRET');
-
-    // Required for Voice grant
-    $outgoingApplicationSid = 'APxxxxxxxxxxxx';
-    // An identifier for your app - can be anything you'd like
-    $identity = "john_doe";
-
-    // Create access token, which we will serialize and send to the client
-    $token = new AccessToken(
-        $twilioAccountSid,
-        $twilioApiKey,
-        $twilioApiSecret,
-        3600,
-        $identity
-    );
-
-    // Create Voice grant
-    $voiceGrant = new VoiceGrant();
-    $voiceGrant->setOutgoingApplicationSid($outgoingApplicationSid);
-
-    // Optional: add to allow incoming calls
-    $voiceGrant->setIncomingAllow(true);
-
-    // Add grant to token
-    $token->addGrant($voiceGrant);
-
-    // render token to string
-    echo $token->toJWT();
-}
-
-
-
-
-
 function pay_pal_token()
 {
 
 
-    $secret =
-        $id =
+    $paypal_clinet = Setting::where('id', 1)->first()->paypal_clinet;
+    $paypal_s = Setting::where('id', 1)->first()->paypal_s;
 
 
-    $clientId = base64_encode(env('PAYPAL_CLIENT_ID'));
-    $clientSecret = base64_encode(env('PAYPAL_SECRET'));
+
+
+    $clientId = base64_encode($paypal_clinet);
+    $clientSecret = base64_encode($paypal_s);
 
     $apiUrl = "https://api-m.sandbox.paypal.com/v1/oauth2/token";
     $credentials = "$clientId:$clientSecret";
@@ -117,72 +82,101 @@ function pay_pal_token()
     return $var->access_token;
 }
 
-function get_sms_profile(){
-             
 
-    $auth = env('TELNYX');
+function paypal_pay()
+{
 
-    $curl = curl_init();
+        $token = pay_pal_token();
+        $trxID = "SIDE-" . date('ymd-his');
+        $user_id = Auth::id();
 
-    curl_setopt_array($curl, [
-        CURLOPT_HTTPHEADER => [
-            "Authorization: Bearer $auth"
-        ],
-        CURLOPT_URL => "https://api.telnyx.com/v2/messaging_profiles",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_CUSTOMREQUEST => "GET",
+        $cost = Plan::where('id', 1)->first()->amount ?? null;
 
-    ]);
+        $url = url('');
 
-    $var = curl_exec($curl);
-    curl_close($curl);
-    $var = json_decode($var);
+        $curl = curl_init();
+        $data = [
+            "intent" => "CAPTURE",
+            "purchase_units" => [[
+                "reference_id" => "$trxID",
+                "amount" => [
+                    "value" => $cost,
+                    "currency_code" => "USD"
+                ]
+            ]],
+            "application_context" => [
+                "cancel_url" => "$url/cancel?status=false&ref=$trxID",
+                "return_url" => "$url/success?status=true&ref=$trxID&amount=$cost&user_id=$user_id"
+            ]
+        ];
+
+        $post_data = json_encode($data);
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api-m.sandbox.paypal.com/v2/checkout/orders',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $post_data,
+            CURLOPT_HTTPHEADER => array(
+                "Authorization:Bearer" . " " . $token,
+                'Content-Type: application/json',
+            ),
+        ));
 
 
-    return $var->data[0]->id;
+        $var = curl_exec($curl);
 
+        curl_close($curl);
 
-
-}
-
-
-function sip_token(){
-
-    $auth = env('TELNYX');
-    $apiUrl = "https://api.telnyx.com/v2/telephony_credentials";
-    $connt_id = env('CONNTID');
-
-    $data = [
-        'connection_id' => $connt_id,
-    ];
-
-
-    
-
-
-    $options = [
-        CURLOPT_URL => $apiUrl,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => http_build_query($data),
-        CURLOPT_HTTPHEADER => [
-            'Content-Type: application/x-www-form-urlencoded',
-            'Authorization: Basic ' . $auth,
-        ],
-    ];
-
-    $ch = curl_init();
-    curl_setopt_array($ch, $options);
-
-    $var = curl_exec($ch);
-
-    $var = json_decode($var);
-
-    dd($var, $connt_id, $auth);
-
-    curl_close($ch);
+        $var = json_decode($var);
+        $link = $var->links[1]->href ?? null;
+        $query = parse_url($link, PHP_URL_QUERY);
+        parse_str($query, $query_params);
+        $token = $query_params['token'];
 
 
 
 
-}
+        $body = $link;
+
+
+        $trx = new Transaction();
+        $trx->trx_id = $trxID;
+        $trx->user_id = Auth::id();
+        $trx->amount = $cost;
+        $trx->status = 3; //initiated;
+        $trx->type = 2; //credit
+        $trx->token = $token;
+        $trx->save();
+
+
+
+
+        if ($link != null) {
+            return  $body;
+        } else {
+            return null;
+        }
+    }
+
+
+    function stripe_pay(){
+
+        $cost = Plan::where('id', 1)->first()->amount ?? null;
+
+        $email = Auth::user()->email;
+        $id = Auth::user()->id;
+        $body = url('') . "/stripe?amount=$cost&email=$email&id=$id";
+
+        return $body;
+
+    }
+
+
+
+

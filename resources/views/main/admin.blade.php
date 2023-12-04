@@ -4,7 +4,7 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Side Campus - Responsive Bootstrap 4 Admin Dashboard Template</title>
+      <title>Side Campus - All Books Available</title>
       <!-- Favicon -->
       <link rel="shortcut icon" href="{{ url('') }}/public/assets/images/favicon.ico" />
       <!-- Bootstrap CSS -->
@@ -50,12 +50,12 @@
                      <li class="active active-menu">
                         <a href="admin-dashboard.html#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Admin</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="admin" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
-                           <li class="active"><a href="admin-dashboard.html"><i class="las la-house-damage"></i>Dashboard</a></li>
-                           <li><a href="admin-category.html"><i class="ri-function-line"></i>Books Category</a></li>
-                           <li><a href="admin-author.html"><i class="ri-book-line"></i>Author</a></li>
+                           <li class="active"><a href="admin"><i class="las la-house-damage"></i>Dashboard</a></li>
+                           <li><a href="category"><i class="ri-function-line"></i>Books Category</a></li>
+                           <li><a href="author"><i class="ri-book-line"></i>Author</a></li>
                            <li><a href="book-list"><i class="ri-file-pdf-line"></i>Books</a></li>
-                           <li><a href="admin-books.html"><i class="ri-user-line"></i>Users</a></li>
-                           <li><a href="admin-books.html"><i class="ri-settings-line"></i>Settings</a></li>
+                           <li><a href="users"><i class="ri-user-line"></i>Users</a></li>
+                           <li><a href="settings"><i class="ri-settings-line"></i>Settings</a></li>
 
                         </ul>
                      </li>
@@ -65,7 +65,7 @@
                   <div class="iq-card">
                      <div class="iq-card-body">
                         <div class="sidebarbottom-content">
-                           <button type="submit" class="btn w-100 btn-primary mt-4 view-more">Log Out</button>
+                           <a href="log-out"  class="btn w-100 btn-primary mt-4">Log Out</a>
                         </div>
                      </div>
                   </div>
