@@ -234,6 +234,18 @@ class SocialContoller extends Controller
     }
 
 
+    public function edit_post(request $request)
+    {
+        Post::where('id', $request->post_id)->update(['message' => $request->message]);
+        return response()->json([
+
+            'status' => true,
+            'message' => "Post updated successfully",
+
+        ], 200);
+    }
+
+
     public function delete_comment(request $request)
     {
 
