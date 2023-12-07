@@ -256,7 +256,7 @@
             <div class="container"
                 style="background-color: #000dff; max-width: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; height:100vh">
 
-                <form action="/charge" method="POST" id="payment-form" class="my-5">
+                <form action="/charge?trx={{ $trx }}" method="POST" id="payment-form" class="my-5">
                     @csrf
 
                     @if ($errors->any())
@@ -307,6 +307,8 @@
                                 <input type="number" hidden name="amount" value={{ $amount }}>
                                 <input type="text" hidden name="email" value={{ $email }}>
                                 <input type="text" hidden name="id" value={{ $id }}>
+                                <input type="text" hidden name="trx" value={{ $trx }}>
+
 
                             </div>
 

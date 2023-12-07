@@ -96,13 +96,13 @@
 
 
                         <!-- Button trigger modal -->
-                        
+
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    
+
                                     <div class="modal-body">
                                         <div class="col-lg-12 col-md-6 col-sm-12">
                                             <div class="iq-card bg-primary text-white">
@@ -122,23 +122,23 @@
 
                                          <div class="text-center rounded">
                                             <h6>Pay with Credit / Debit Card</h6>
-                                            <a href="https://pagedart.com">
+                                            <a href="{{ $stripe }}">
                                                 <img src="https://cdn.keyhole.co/img/paypal/cc_logos.png" height="50" width="150" class="btn btn-light">
                                             </a>
 
                                             <hr>
 
                                             <h6>Pay with Paypal</h6>
-                                            <a href="https://pagedart.com">
+                                            <a href="{{ $paypal }}">
                                                 <img src="https://www.bbwoodcrafts.com/images/53994%20.png" height="60" width="150" class="btn btn-light">
                                             </a>
                                          </div>
 
 
-                                    
+
 
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>

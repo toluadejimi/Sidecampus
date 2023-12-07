@@ -82,14 +82,14 @@ class PaymentController extends Controller
             $body = $link;
 
 
-            $trx = new Transaction();
-            $trx->trx_id = $trxID;
-            $trx->user_id = Auth::id();
-            $trx->amount = $cost;
-            $trx->status = 3; //initiated;
-            $trx->type = 2; //credit
-            $trx->token = $token;
-            $trx->save();
+            // $trx = new Transaction();
+            // $trx->trx_id = $trxID;
+            // $trx->user_id = Auth::id();
+            // $trx->amount = $cost;
+            // $trx->status = 3; //initiated;
+            // $trx->type = 2; //credit
+            // $trx->token = $token;
+            // $trx->save();
 
 
 
@@ -137,7 +137,7 @@ class PaymentController extends Controller
 
             $stripe_key = Setting::where('id', 1)->first()->stripe_s;
             \Stripe\Stripe::setApiKey($stripe_key);
-    
+
             $customerId = $request->customer_id;
 
             $stripe = \Stripe\Charge::create([
@@ -274,10 +274,8 @@ class PaymentController extends Controller
                     $currentDate = Carbon::now();
                     $expirationDate = $currentDate->addMonth();
 
-
                     $currentDateFormatted = $currentDate->toDateString();
                     $expirationDateFormatted = $expirationDate->toDateString();
-
 
                     //dd($currentDateFormatted, $expirationDateFormatted);
 
@@ -290,9 +288,9 @@ class PaymentController extends Controller
                     $plan->amount = $amount;
                     $plan->save();
 
+                    Transaction::where('trx_id', $request->trx)->update(['status'=> 1]);
 
 
-                    $ref = "FUND" . random_int(0000, 9999) . date("his");
                     $amount = $request->amount;
 
                     return view('success', compact('ref', 'amount'));
@@ -341,11 +339,12 @@ class PaymentController extends Controller
                 $plan->save();
 
 
-
-                $ref = "FUND" . random_int(0000, 9999) . date("his");
+                $ref = $request->trx;
                 $amount = $request->amount;
 
                 return view('success', compact('ref', 'amount'));
+
+
             } else {
                 return view('decline', compact('ref', 'amount'));
             }
@@ -363,10 +362,10 @@ class PaymentController extends Controller
     {
 
 
-        if ($request->ref == null || $request->amount == null) {
+        if ($request->trx == null || $request->amount == null) {
             $ref = "FUND" . random_int(0000, 9999) . date("his");
         } else {
-            $ref = $request->ref;
+            $ref = $request->trx;
             $amount = Plan::where('id', 1)->first()->amount ?? null;
         }
 
@@ -411,12 +410,14 @@ class PaymentController extends Controller
         $amount = $request->amount;
         $email = $request->email;
         $id = $request->id;
+        $trx = $request->trx;
+
 
 
         //$save_cards =
 
 
-        return view('stripe', compact('amount', 'email', 'id'));
+        return view('stripe', compact('amount', 'email', 'id', 'trx'));
     }
 
 

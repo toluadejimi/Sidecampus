@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class WelcomeController extends Controller
 {
-    
+
     public function index(){
 
 
         $data['books'] = Book::latest()->take('50')->get();
         $data['newrelease'] = Book::where('type', 'new_release')->latest()->take('50')->get();
 
-    
+
         return view('welcome', $data);
 
 
@@ -86,16 +86,17 @@ class WelcomeController extends Controller
 
     public function plan(request $request){
 
-
         $data['plan'] = MyPlan::where('user_id', Auth::id())->first() ?? null;
         $data['cost'] = Plan::where('id', 1)->first() ?? null;
 
-
         if($data['plan'] == null){
-
             $data['ck'] = 0;
-
+        }else{
+            $data['ck'] = 1;
         }
+
+        $data['paypal'] =  paypal_pay();
+        $data['stripe'] =  stripe_pay();
 
 
 

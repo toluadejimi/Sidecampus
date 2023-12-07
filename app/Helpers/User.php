@@ -1,9 +1,12 @@
 <?php
 
+use App\Models\Plan;
 use App\Models\Setting;
-use Illuminate\Http\Request;
+use App\Models\Transaction;
 use Twilio\Jwt\AccessToken;
+use Illuminate\Http\Request;
 use Twilio\Jwt\Grants\VoiceGrant;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -87,7 +90,8 @@ function paypal_pay()
 {
 
         $token = pay_pal_token();
-        $trxID = "SIDE-" . date('ymd-his');
+        $trxID = date('his').random_int(0000, 9999);
+
         $user_id = Auth::id();
 
         $cost = Plan::where('id', 1)->first()->amount ?? null;
@@ -168,10 +172,21 @@ function paypal_pay()
     function stripe_pay(){
 
         $cost = Plan::where('id', 1)->first()->amount ?? null;
+        $trxID = date('his').random_int(0000, 9999);
+
+        $trx = new Transaction();
+        $trx->trx_id = $trxID;
+        $trx->user_id = Auth::id();
+        $trx->amount = $cost;
+        $trx->status = 3; //initiated;
+        $trx->type = 2; //credit
+        $trx->save();
+
 
         $email = Auth::user()->email;
         $id = Auth::user()->id;
-        $body = url('') . "/stripe?amount=$cost&email=$email&id=$id";
+        $body = url('') . "/stripe?amount=$cost&email=$email&id=$id&trx=$trxID";
+
 
         return $body;
 

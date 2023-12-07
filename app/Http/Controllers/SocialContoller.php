@@ -85,6 +85,28 @@ class SocialContoller extends Controller
         }
 
 
+        if($request->message != null && $request->file == null) {
+
+
+            $post = new Post();
+            $post->user_id = Auth::id();
+            $post->message = $request->message;
+            $post->user_name = Auth::user()->first_name . " " . Auth::user()->last_name;
+            $post->user_image = Auth::user()->image;
+            $post->media_title = $request->media_title;
+            $post->save();
+
+            return response()->json([
+
+                'status' => true,
+                'message' => "Post successful",
+    
+            ], 200);
+
+
+        }
+
+
         return response()->json([
 
             'status' => false,
