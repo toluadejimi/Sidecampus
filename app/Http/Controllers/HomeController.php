@@ -80,7 +80,7 @@ class HomeController extends Controller
 
 
         $data['book'] = Book::select('id','title', 'author', 'description', 'pdf', 'images', 'audio', 'reads', 'rating')->where('id', $request->book_id)->get();
-        $data['review'] = Review::select('user_profile_pics', 'rating', 'user_name', 'created_at')->where('book_id', $request->book_id)->get();
+        $data['review'] = Review::select('user_profile_pics','comment','rating','user_name', 'created_at')->where('book_id', $request->book_id)->get();
 
         $author = Book::where('id', $request->book_id)->first()->author ?? null;
         $data['similar_by_author'] = Book::select('title', 'images')->where('author', $author)->get();
@@ -187,7 +187,7 @@ class HomeController extends Controller
         Review::where('id', $request->review_id)->update([
             'comment', $request->comment,
             'rating', $request->rating,
-        
+
         ]);
 
         return response()->json([
