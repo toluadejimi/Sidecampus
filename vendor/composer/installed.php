@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '628f6d62c40ca5180a1914911cb6dd888d66ccac',
+        'reference' => '1e2612b6817edb634983af6bd187c3fe9ac5adfa',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -472,6 +472,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'james-heinrich/getid3' => array(
+            'pretty_version' => 'v1.9.23',
+            'version' => '1.9.23.0',
+            'reference' => '06c7482532ff2b3f9111b011d880ca6699c8542b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../james-heinrich/getid3',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -499,7 +508,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '628f6d62c40ca5180a1914911cb6dd888d66ccac',
+            'reference' => '1e2612b6817edb634983af6bd187c3fe9ac5adfa',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -201,7 +201,7 @@ class HomeController extends Controller
 
     public function play_audio(request $request)
     {
-        $audio = Book::select('audio', 'images')->where('id', $request->book_id)->get() ?? null;
+        $audio = Book::select('audio','audio_duration', 'images')->where('id', $request->book_id)->get() ?? null;
         Book::where('id', $request->book_id)->increment('plays', 1);
 
         return response()->json([

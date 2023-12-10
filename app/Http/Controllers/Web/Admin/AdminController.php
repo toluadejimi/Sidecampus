@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use getID3 as ID3;
 use App\Models\Book;
+use App\Models\Plan;
 use App\Models\User;
 use App\Models\Author;
 use App\Models\MyPlan;
@@ -11,7 +13,7 @@ use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Plan;
+
 
 class AdminController extends Controller
 {
@@ -150,6 +152,20 @@ class AdminController extends Controller
 
 
         if ($request->hasFile('audio')) {
+
+
+            if ($file->isValid() && $file->getClientOriginalExtension() === 'mp3') {
+                $getID3 = new ID3\GetID3();
+                $fileInfo = $getID3->analyze($file->getPathname());
+
+                if (isset($fileInfo['playtime_seconds'])) {
+                    $duration = $fileInfo['playtime_seconds'];
+                    return "The duration of the audio file is {$duration} seconds.";
+                }
+            }
+
+            return "Unable to retrieve audio duration.";
+
 
 
             $record = Book::find($request->id);
@@ -441,7 +457,7 @@ class AdminController extends Controller
 
         return back()->with('message', "Payment Updated Successfully");
     }
-   
+
 
 
 
