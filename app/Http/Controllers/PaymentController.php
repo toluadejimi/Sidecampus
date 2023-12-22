@@ -543,4 +543,19 @@ class PaymentController extends Controller
 
         return view('success', compact('data', 'order_token', 'status'));
     }
+
+
+
+
+    public function ck_transaction(request $request)
+    {
+
+
+        if($request->status == 'success'){
+
+            return redirect('plan')->with('message', 'Subscription Successful');
+
+        }
+        
+    }
 }

@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth', 'user', 'session.timeout']], function () 
     Route::get('profile', [WelcomeController::class, 'profile']);
     Route::post('update-profile', [WelcomeController::class, 'update_profile']);
 
-
+    Route::get('read', [WelcomeController::class, 'read']);
     Route::get('plan', [WelcomeController::class, 'plan']);
 
 
@@ -122,6 +122,10 @@ Route::get('success', [PaymentController::class, 'success']);
 Route::get('decline', [PaymentController::class, 'decline']);
 
 Route::get('processing', [PaymentController::class, 'processing']);
+
+
+Route::get('transaction', [PaymentController::class, 'ck_transaction']);
+
 
 
 

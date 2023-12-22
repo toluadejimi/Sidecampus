@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html oncontextmenu="return false">
 
 <head>
     <!-- Required meta tags -->

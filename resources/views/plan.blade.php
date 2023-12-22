@@ -61,8 +61,13 @@
                 <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                            <h4 class="card-title">My Plan</h4>
+                            <h4 class="card-title">My Active Plan</h4>
                         </div>
+
+                        <div class="mt-2">
+                            <p class="text-danger">Expires at {{$plan->expires_at}}</p>
+                        </div>
+
                     </div>
                     <div class="iq-card-body">
                         <div class="acc-edit">
@@ -80,9 +85,25 @@
 
                             @else
 
-                            <form>
-                                <progress value="59" max="{{$plan->days_remaianing}}"> </progress>
-                            </form>
+                            <div class="d-flex justify-content-between">
+                           
+
+                                    <div>
+                                        <progress value="@if($plan->days_remaining == 0){{$days}}@else{{ $plan->days_remaining}}@endif" max="{{$current_date}}"> </progress>
+                                    </div>
+
+                                   
+
+                            </div>
+
+                            <hr>
+
+
+                            <div class="">
+                                <p class="text-small">@if($plan->days_remaining == 0){{$days}}@else{{ $plan->days_remaining}}@endif days to expire</p>
+
+                            </div>   
+                           
 
                             @endif
 

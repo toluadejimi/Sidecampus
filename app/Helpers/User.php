@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Plan;
+use App\Models\MyPlan;
 use App\Models\Setting;
 use App\Models\Transaction;
 use Twilio\Jwt\AccessToken;
@@ -82,7 +83,7 @@ function pay_pal_token()
     $var = json_decode($var);
     curl_close($ch);
 
-    return $var->access_token;
+    return $var->access_token ?? null;
 }
 
 
@@ -141,7 +142,7 @@ function paypal_pay()
         $link = $var->links[1]->href ?? null;
         $query = parse_url($link, PHP_URL_QUERY);
         parse_str($query, $query_params);
-        $token = $query_params['token'];
+        $token = $query_params['token'] ?? null;
 
 
 
@@ -188,7 +189,22 @@ function paypal_pay()
         $body = url('') . "/stripe?amount=$cost&email=$email&id=$id&trx=$trxID";
 
 
-        return $body;
+        return $body ?? null;
+
+    }
+
+
+    function check_plan(){
+
+        $status = MyPlan::where('user_id', Auth::id())->first()->status;
+
+        if($status == 1){
+            return true;
+        }else{
+            return false;
+        }
+
+
 
     }
 

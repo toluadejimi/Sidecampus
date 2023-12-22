@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\Plan;
 use App\Models\User;
@@ -86,8 +87,14 @@ class WelcomeController extends Controller
 
     public function plan(request $request){
 
+
+        $currentDate = Carbon::now();
+        $data['current_date'] = $currentDate->daysInMonth;
+    
         $data['plan'] = MyPlan::where('user_id', Auth::id())->first() ?? null;
         $data['cost'] = Plan::where('id', 1)->first() ?? null;
+
+
 
         if($data['plan'] == null){
             $data['ck'] = 0;
@@ -99,9 +106,39 @@ class WelcomeController extends Controller
         $data['stripe'] =  stripe_pay();
 
 
+        if($data['plan']->days_remaining == 0){
+            $data['days'] = $data['current_date'];
+        }
+
+
+
+            //dd($data['plan']);
+
+
 
         return view('plan', $data);
 
+
+
+    }
+
+
+
+    public function read(request $request){
+
+
+        $data['data'] = Book::where('id', $request->book_id)->first() ?? null;
+        $data['book_pdf'] = Book::where('id', $request->book_id)->first()->pdf ?? null;
+
+
+        $ck = check_plan();
+
+        if($ck == false){
+            return back()->with('error', "You do not have an active subscription");
+        }
+
+
+        return view('read', $data);
 
 
     }
