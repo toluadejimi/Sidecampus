@@ -90,9 +90,9 @@ class AdminController extends Controller
         $bok->description = $request->description;
         $bok->author = $request->author;
         $bok->category = $request->category;
-        $bok->pdf = $pdf;
-        $bok->audio = $audio;
-        $bok->images = $images;
+        $bok->pdf = $pdf ?? null;
+        $bok->audio = $audio ?? null;
+        $bok->images = $images ?? null;
         $bok->save();
 
 

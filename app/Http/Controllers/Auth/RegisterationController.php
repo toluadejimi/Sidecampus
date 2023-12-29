@@ -69,7 +69,7 @@ class RegisterationController extends Controller
                     ]);
 
                 $data = array(
-                    'fromsender' => 'noreply@sidecampus.bplux.store', 'SideCamous',
+                    'fromsender' => 'noreply@sidecampus.com', 'Sidecampus',
                     'subject' => "One Time Password",
                     'toreceiver' => $email,
                     'sms_code' => $sms_code,
@@ -94,7 +94,7 @@ class RegisterationController extends Controller
                 ]);
 
             $data = array(
-                'fromsender' => 'noreply@sidecampus.bplux.store', 'SideCampus',
+                'fromsender' => 'noreply@sidecampus.com', 'SideCampus',
                 'subject' => "One Time Password",
                 'toreceiver' => $email,
                 'sms_code' => $sms_code,
@@ -178,7 +178,7 @@ class RegisterationController extends Controller
             $user_id = User::where('email', $request->email)->first()->id;
            // $chl_plan = MyPlan::where('user_id', $user_id)->first()->user_id ?? null;
             // $data = array(
-            //     'fromsender' => 'noreply@sidecampus.bplux.store', 'Gomobilez',
+            //     'fromsender' => 'noreply@sidecampus.com', 'Gomobilez',
             //     'subject' => "Account Creation",
             //     'toreceiver' => $email,
             //     'name' => $first_name,
@@ -236,7 +236,7 @@ class RegisterationController extends Controller
                 $code = User::where('email', $request->email)->first()->code ?? null;
 
                 $data = array(
-                    'fromsender' => 'noreply@sidecampus.bplux.store', 'SideCampus',
+                    'fromsender' => 'noreply@sidecampus.com', 'SideCampus',
                     'subject' => "One Time Password",
                     'toreceiver' => $request->email,
                     'sms_code' => $code,
@@ -352,7 +352,7 @@ class RegisterationController extends Controller
             if ($check == $email) {
 
                 $data = array(
-                    'fromsender' => 'noreply@sidecampus.bplux.store', 'Gomobilez',
+                    'fromsender' => 'noreply@sidecampus.com', 'Gomobilez',
                     'subject' => "One Time Password",
                     'toreceiver' => $email,
                     'sms_code' => $code,
