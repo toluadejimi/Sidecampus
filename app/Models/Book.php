@@ -20,4 +20,13 @@ class Book extends Model
         'images'
 
     ];
+
+
+
+    protected $casts = [
+
+        'reads' => 'integer',
+        'rating' => 'integer',
+
+    ];
 }
