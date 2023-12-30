@@ -42,9 +42,9 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        
+
         'wallet' => 'integer',
-        'bonus_wallet' => 'integer',
+        'is_email_verified' => 'integer',
         'status' => 'integer',
 
 
