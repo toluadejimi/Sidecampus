@@ -21,6 +21,7 @@ class MyPlan extends Model
     protected $casts = [
 
         'status' => 'integer',
+        'days_remaining' => 'integer',
 
     ];
 
