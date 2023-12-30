@@ -11,10 +11,17 @@ class MyPlan extends Model
 
 
     protected $fillable = [
-        'status', 
+        'status',
         'subscribe_at',
         'days_remaining',
         'expires_at'
+    ];
+
+
+    protected $casts = [
+
+        'status' => 'integer',
+
     ];
 
 
