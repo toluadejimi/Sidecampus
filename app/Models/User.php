@@ -45,6 +45,7 @@ class User extends Authenticatable
 
         'wallet' => 'integer',
         'is_email_verified' => 'integer',
+        'code' => 'integer',
         'status' => 'integer',
 
 
