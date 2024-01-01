@@ -117,7 +117,7 @@ class PaymentController extends Controller
 
             $email = Auth::user()->email;
             $id = Auth::user()->id;
-            $body = url('') . "/stripe?amount=$cost&email=$email&id=$id";
+            $body = "https://sidecampus.com/stripe?amount=$cost&email=$email&id=$id";
 
 
 
@@ -556,6 +556,6 @@ class PaymentController extends Controller
             return redirect('plan')->with('message', 'Subscription Successful');
 
         }
-        
+
     }
 }
