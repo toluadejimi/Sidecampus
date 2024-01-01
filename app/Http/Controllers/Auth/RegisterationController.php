@@ -289,7 +289,7 @@ class RegisterationController extends Controller
             }
 
 
-            if ($get_code  != $code) {
+            if ($get_code != $code) {
 
                 return response()->json([
                     'status' => $this->failed,
