@@ -267,11 +267,31 @@ class HomeController extends Controller
 
     public function get_by_category(request $request)
     {
-        $books = Book::select('title', 'author','category', 'audio','images', 'rating')->where('category', $request->category)->get();
-        return response()->json([
+
+
+        if($request->category == 'ALL'){
+
+            $books = Book::select('id','title', 'author','category', 'audio','images', 'rating')->take(300)->get();
+            return response()->json([
             'status' => true,
             'data' => $books
-        ], 200);
+            ], 200);
+
+
+        }else{
+
+            $books = Book::select('id','title', 'author','category', 'audio','images', 'rating')->where('category', $request->category)->get();
+            return response()->json([
+                'status' => true,
+                'data' => $books
+            ], 200);
+
+
+        }
+
+
+
+
 
 
     }
