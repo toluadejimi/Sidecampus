@@ -79,12 +79,32 @@ class HomeController extends Controller
     {
 
 
-        $data['book'] = Book::select('id','title', 'author', 'description', 'pdf', 'images', 'audio', 'reads', 'rating')->where('id', $request->book_id)->get();
-        $data['review'] = Review::select('user_profile_pics','comment','rating','user_name', 'created_at')->where('book_id', $request->book_id)->get();
+        $data['book'] = Book::select('id', 'title', 'author', 'description', 'pdf', 'images', 'audio', 'reads', 'rating')->where('id', $request->book_id)->get();
+        $data['review'] = Review::select('user_profile_pics', 'comment', 'rating', 'user_name', 'created_at')->where('book_id', $request->book_id)->get();
 
         $author = Book::where('id', $request->book_id)->first()->author ?? null;
         $data['similar_by_author'] = Book::select('title', 'images')->where('author', $author)->get();
         Book::where('id', $request->book_id)->increment('views', 1);
+
+        $book_image = Book::where('id', $request->book_id)->first()->images ?? null;
+        $title = Book::where('id', $request->book_id)->first()->title ?? null;
+
+        $ckv = View::where('book_id', $request->book_id)->first() ?? null;
+        if ($ckv == null) {
+            $v = new View();
+            $v->user_id = Auth::id();
+            $v->book_id = $request->book_id;
+            $v->images = $book_image;
+            $v->title = $title;
+            $v->save();
+        }
+
+
+        $data['viewd'] = View::select('id', 'title', 'images')->where('user_id', Auth::id())->get() ?? null;
+
+
+
+
 
 
 
@@ -201,7 +221,7 @@ class HomeController extends Controller
 
     public function play_audio(request $request)
     {
-        $audio = Book::select('audio','audio_duration', 'images')->where('id', $request->book_id)->get() ?? null;
+        $audio = Book::select('audio', 'audio_duration', 'images')->where('id', $request->book_id)->get() ?? null;
         Book::where('id', $request->book_id)->increment('plays', 1);
 
         return response()->json([
@@ -255,7 +275,7 @@ class HomeController extends Controller
     public function get_all_books(request $request)
     {
 
-        $books = Book::select('title', 'category', 'author', 'audio','images', 'rating')->get();
+        $books = Book::select('title', 'category', 'author', 'audio', 'images', 'rating')->get();
         return response()->json([
 
             'status' => true,
@@ -269,44 +289,31 @@ class HomeController extends Controller
     {
 
 
-        if($request->category == 'ALL'){
+        if ($request->category == 'ALL') {
 
-            $books = Book::select('id','title', 'author','category', 'audio','images', 'rating')->take(300)->get();
-            return response()->json([
-            'status' => true,
-            'data' => $books
-            ], 200);
-
-
-        }else{
-
-            $books = Book::select('id','title', 'author','category', 'audio','images', 'rating')->where('category', $request->category)->get();
+            $books = Book::select('id', 'title', 'author', 'category', 'audio', 'images', 'rating')->take(300)->get();
             return response()->json([
                 'status' => true,
                 'data' => $books
             ], 200);
+        } else {
 
-
+            $books = Book::select('id', 'title', 'author', 'category', 'audio', 'images', 'rating')->where('category', $request->category)->get();
+            return response()->json([
+                'status' => true,
+                'data' => $books
+            ], 200);
         }
-
-
-
-
-
-
     }
 
 
 
     public function get_by_audio(request $request)
     {
-        $books = Book::select('title', 'author','category', 'audio','images', 'rating')->where('audio','!=', null)->get();
+        $books = Book::select('title', 'author', 'category', 'audio', 'images', 'rating')->where('audio', '!=', null)->get();
         return response()->json([
             'status' => true,
             'data' => $books
         ], 200);
-
-
     }
-
 }
