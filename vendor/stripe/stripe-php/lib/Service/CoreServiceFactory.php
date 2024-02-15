@@ -18,10 +18,12 @@ namespace Stripe\Service;
  * @property BillingPortal\BillingPortalServiceFactory $billingPortal
  * @property ChargeService $charges
  * @property Checkout\CheckoutServiceFactory $checkout
+ * @property Climate\ClimateServiceFactory $climate
  * @property CountrySpecService $countrySpecs
  * @property CouponService $coupons
  * @property CreditNoteService $creditNotes
  * @property CustomerService $customers
+ * @property CustomerSessionService $customerSessions
  * @property DisputeService $disputes
  * @property EphemeralKeyService $ephemeralKeys
  * @property EventService $events
@@ -88,10 +90,12 @@ class CoreServiceFactory extends \Stripe\Service\AbstractServiceFactory
         'billingPortal' => BillingPortal\BillingPortalServiceFactory::class,
         'charges' => ChargeService::class,
         'checkout' => Checkout\CheckoutServiceFactory::class,
+        'climate' => Climate\ClimateServiceFactory::class,
         'countrySpecs' => CountrySpecService::class,
         'coupons' => CouponService::class,
         'creditNotes' => CreditNoteService::class,
         'customers' => CustomerService::class,
+        'customerSessions' => CustomerSessionService::class,
         'disputes' => DisputeService::class,
         'ephemeralKeys' => EphemeralKeyService::class,
         'events' => EventService::class,

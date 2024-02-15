@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "africastalking/africastalking": "^3.0",
+        "celo/ghost-pdf": "v1.0.x-dev",
         "barryvdh/laravel-dompdf": "^2.0",
         "beyondcode/laravel-websockets": "^1.14",
         "braintree/braintree_php": "6.13.0",
@@ -22,6 +23,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "livewire/livewire": "^3.1",
+        "mostafaznv/pdf-optimizer": "^1.0",
         "nesbot/carbon": "^2.71",
         "paragonie/sodium_compat": "^1.20",
         "paypal/paypal-checkout-sdk": "^1.0",

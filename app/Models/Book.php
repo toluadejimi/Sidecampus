@@ -17,7 +17,8 @@ class Book extends Model
         'category',
         'pdf',
         'audio',
-        'images'
+        'images',
+        'pdf_size'
 
     ];
 

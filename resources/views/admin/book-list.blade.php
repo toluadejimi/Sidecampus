@@ -77,6 +77,13 @@
                                                     title="" data-original-title="Edit"
                                                     href="edit-book-view?id={{ $data->id }}"><i
                                                         class="ri-pencil-line"></i></a>
+
+                                                 <a class="bg-warning" data-toggle="tooltip" data-placement="top"
+                                                    title="" data-original-title="Compress"
+                                                    href="compress-book?id={{ $data->id }}"><i
+                                                        class="ri-book-line"></i></a>
+
+                                                    
                                                 <a class="bg-danger" data-toggle="tooltip" data-placement="top" title=""
                                                     data-original-title="Delete"
                                                     href="delete-book?id={{ $data->id }}"><i

@@ -41,6 +41,7 @@ Route::get('new-book', [AdminController::class, 'new_book_view']);
 Route::post('add-new-book', [AdminController::class, 'add_new_book']);
 Route::get('edit-book-view', [AdminController::class, 'edit_book_view']);
 Route::post('edit-book', [AdminController::class, 'edit_book']);
+Route::get('compress-book', [AdminController::class, 'compress_book']);
 Route::get('delete-book', [AdminController::class, 'delete_book']);
 
 
@@ -125,20 +126,6 @@ Route::get('processing', [PaymentController::class, 'processing']);
 
 
 Route::get('transaction', [PaymentController::class, 'ck_transaction']);
-
-
-
-
-Route::get('make-call', [VoiceController::class, 'call']);
-
-Route::post('call', [VoiceController::class, 'initiateCall']);
-
-
-//Route::livewire('dialer', 'dialer');
-
-
-// After
-//Route::get('/dialer', \App\Http\Livewire\Dialer::class);
 
 
 

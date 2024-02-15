@@ -239,8 +239,6 @@ class AdminController extends Controller
         }
 
 
-
-
         $record = Book::find($request->id);
         if ($record) {
             $record->update([

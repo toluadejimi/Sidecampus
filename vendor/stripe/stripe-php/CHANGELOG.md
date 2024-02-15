@@ -1,5 +1,69 @@
 # Changelog
 
+## 13.10.0 - 2024-02-01
+* [#1636](https://github.com/stripe/stripe-php/pull/1636) Update generated code
+  * Add support for new value `swish` on enum `PaymentLink.payment_method_types[]`
+  * Add support for `swish` on `PaymentMethod`
+  * Add support for new value `swish` on enum `PaymentMethod.type`
+  * Add support for `jurisdiction_level` on `TaxRate`
+  * Change type of `Terminal.Reader.status` from `string` to `enum('offline'|'online')`
+* [#1633](https://github.com/stripe/stripe-php/pull/1633) Update generated code
+  * Add support for `issuer` on `Invoice`
+  * Add support for `customer_balance` on `PaymentMethodConfiguration`
+* [#1630](https://github.com/stripe/stripe-php/pull/1630) Add paginated requests helper function and use in Search and All
+
+## 13.9.0 - 2024-01-12
+* [#1629](https://github.com/stripe/stripe-php/pull/1629) Update generated code
+  * Add support for new resource `CustomerSession`
+  * Add support for `create` method on resource `CustomerSession`
+  * Remove support for values `obligation_inbound`, `obligation_payout_failure`, `obligation_payout`, and `obligation_reversal_outbound` from enum `BalanceTransaction.type`
+  * Add support for `billing_cycle_anchor_config` on `Subscription`
+
+## 13.8.0 - 2024-01-04
+* [#1627](https://github.com/stripe/stripe-php/pull/1627) Update generated code
+  * Add support for `retrieve` method on resource `Tax.Registration`
+
+## 13.7.0 - 2023-12-22
+* [#1621](https://github.com/stripe/stripe-php/pull/1621) Update generated code
+  * Add support for new resource `FinancialConnections.Transaction`
+  * Add support for `all` and `retrieve` methods on resource `Transaction`
+  * Add support for `subscribe` and `unsubscribe` methods on resource `FinancialConnections.Account`
+  * Add support for new value `financial_connections.account.refreshed_transactions` on enum `Event.type`
+  * Add support for `subscriptions` and `transaction_refresh` on `FinancialConnections.Account`
+  * Add support for new value `transactions` on enum `FinancialConnections.Session.prefetch[]`
+  * Add support for `revolut_pay` on `PaymentMethodConfiguration`
+  * Remove support for `id_bank_transfer`, `multibanco`, `netbanking`, `pay_by_bank`, and `upi` on `PaymentMethodConfiguration`
+  * Change type of `Quote.invoice_settings` from `nullable(InvoiceSettingQuoteSetting)` to `InvoiceSettingQuoteSetting`
+  * Add support for `destination_details` on `Refund`
+
+## 13.6.0 - 2023-12-07
+* [#1613](https://github.com/stripe/stripe-php/pull/1613) Update generated code
+  * Add support for new values `customer_tax_location_invalid` and `financial_connections_no_successful_transaction_refresh` on enum `StripeError.code`
+  * Add support for new values `payment_network_reserve_hold` and `payment_network_reserve_release` on enum `BalanceTransaction.type`
+  * Remove support for value `various` from enum `Climate.Supplier.removal_pathway`
+  * Add support for `inactive_message` and `restrictions` on `PaymentLink`
+* [#1612](https://github.com/stripe/stripe-php/pull/1612) Report usage of .save and StripeClient
+  * Reports uses of the deprecated `.save` and of `StripeClient` in `X-Stripe-Client-Telemetry`. (You can disable telemetry via `\Stripe\Stripe::setEnableTelemetry(false);`, see the [README](https://github.com/stripe/stripe-php/blob/master/README.md#telemetry).)
+
+## 13.5.0 - 2023-11-30
+* [#1611](https://github.com/stripe/stripe-php/pull/1611) Update generated code
+  * Add support for new resources `Climate.Order`, `Climate.Product`, and `Climate.Supplier`
+  * Add support for `all`, `cancel`, `create`, `retrieve`, and `update` methods on resource `Order`
+  * Add support for `all` and `retrieve` methods on resources `Product` and `Supplier`
+  * Add support for new value `financial_connections_account_inactive` on enum `StripeError.code`
+  * Add support for new values `climate_order_purchase` and `climate_order_refund` on enum `BalanceTransaction.type`
+  * Add support for new values `climate.order.canceled`, `climate.order.created`, `climate.order.delayed`, `climate.order.delivered`, `climate.order.product_substituted`, `climate.product.created`, and `climate.product.pricing_updated` on enum `Event.type`
+
+## 13.4.0 - 2023-11-21
+* [#1608](https://github.com/stripe/stripe-php/pull/1608) Update generated code
+  Add support for `transferred_to_balance` to `CustomerCashBalanceTransaction`
+* [#1605](https://github.com/stripe/stripe-php/pull/1605) Update generated code
+  * Add support for `network_data` on `Issuing.Transaction`
+
+## 13.3.0 - 2023-11-09
+* [#1603](https://github.com/stripe/stripe-php/pull/1603) Update generated code
+  * Add support for new value `terminal_reader_hardware_fault` on enum `StripeError.code`
+
 ## 13.2.1 - 2023-11-06
 * [#1602](https://github.com/stripe/stripe-php/pull/1602) Fix error when "id" is not a string.
 

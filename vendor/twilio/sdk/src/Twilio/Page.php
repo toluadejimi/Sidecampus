@@ -55,12 +55,8 @@ abstract class Page implements \Iterator {
                 $details = $content['details'] ?? [] ;
             }
 
-
-        
             throw new RestException($message, $code, $response->getStatusCode(), $moreInfo, $details);
         }
-
-        
         return $response->getContent();
     }
 

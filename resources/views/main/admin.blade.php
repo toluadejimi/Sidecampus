@@ -82,10 +82,10 @@
                      </div>
                      <div class="iq-navbar-logo d-flex justify-content-between">
                         <a href="index.html" class="header-logo">
-                           <img src="{{ url('') }}/public/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
-                           <div class="logo-title">
+                           {{-- <img src="{{ url('') }}/public/assets/images/logo.png" class="img-fluid rounded-normal" alt=""> --}}
+                           {{-- <div class="logo-title">
                               <span class="text-primary text-uppercase">Side Campus</span>
-                           </div>
+                           </div> --}}
                         </a>
                      </div>
                   </div>
@@ -98,18 +98,18 @@
                         </ul>
                      </nav>
                   </div>
-                  <div class="iq-search-bar">
+                  {{-- <div class="iq-search-bar">
                      <form action="admin-dashboard.html#" class="searchbox">
                         <input type="text" class="text search-input" placeholder="Search Here...">
                         <a class="search-link" href="admin-dashboard.html#"><i class="ri-search-line"></i></a>
                      </form>
-                  </div>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
+                  </div> --}}
+                  {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
                   <i class="ri-menu-3-line"></i>
-                  </button>
+                  </button> --}}
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <ul class="navbar-nav ml-auto navbar-list">
-                        <li class="nav-item nav-icon search-content">
+                        {{-- <li class="nav-item nav-icon search-content">
                            <a href="admin-dashboard.html#" class="search-toggle iq-waves-effect text-gray rounded">
                               <i class="ri-search-line"></i>
                            </a>
@@ -317,21 +317,18 @@
                                  </div>
                               </div>
                            </div>
-                        </li>
+                        </li> --}}
                         <li class="line-height pt-3">
                            <a href="admin-dashboard.html#" class="search-toggle iq-waves-effect d-flex align-items-center">
                               <img src="{{ url('') }}/public/assets/images/user/1.jpg" class="img-fluid rounded-circle mr-3" alt="user">
-                              <div class="caption">
-                                 <h6 class="mb-1 line-height">Barry Tech</h6>
-                                 <p class="mb-0 text-primary">$20.32</p>
-                              </div>
+                              
                            </a>
                            <div class="iq-sub-dropdown iq-user-dropdown">
                               <div class="iq-card shadow-none m-0">
                                  <div class="iq-card-body p-0 ">
                                     <div class="bg-primary p-3">
-                                       <h5 class="mb-0 text-white line-height">Hello Barry Tech</h5>
-                                       <span class="text-white font-size-12">Available</span>
+                                       <h5 class="mb-0 text-white line-height">Hello Admin</h5>
+                                       <span class="text-white font-size-12">Active</span>
                                     </div>
                                     <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">
                                        <div class="media align-items-center">

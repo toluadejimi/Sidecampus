@@ -14,6 +14,9 @@ use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Mostafaznv\PdfOptimizer\Laravel\Facade\PdfOptimizer;
+use Mostafaznv\PdfOptimizer\Enums\ColorConversionStrategy;
+use Mostafaznv\PdfOptimizer\Enums\PdfSettings;
 
 
 class HomeController extends Controller
