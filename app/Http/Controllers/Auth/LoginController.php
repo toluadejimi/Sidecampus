@@ -121,7 +121,7 @@ class LoginController extends Controller
             $save_cards = PayInfo::where('user_id', Auth::id())->select('id','customer_id', 'brand', 'last4', 'exp_month', 'exp_year', 'name')->get();
             $favorite_book = Favorite::where('user_id', Auth::id())->select('book_image', 'title', 'author', 'dexcription')->get();
             $myplan = MyPlan::select('status', 'subscribe_at','days_remaining','expires_at')->where('user_id', Auth::id())->first() ?? null;
-            $keys = Setting::select('srtipe_s', 'stripe_p')->where('id', 1)->get();
+            $keys = Setting::select('stripe_s', 'stripe_p')->where('id', 1)->get();
 
 
 
