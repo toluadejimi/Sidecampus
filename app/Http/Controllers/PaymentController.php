@@ -362,35 +362,29 @@ class PaymentController extends Controller
     {
 
 
-        $parametersJson = json_encode($request->all());
-        send_notification($parametersJson);
+        $email = $request->email;
+        $payid = $request->id;
+
+        $user_id = User::where('email', $email)->first()->id;
+        $amount = Plan::where('id', 1)->first()->amount ?? null;
+
+        $currentDate = Carbon::now();
+        $expirationDate = $currentDate->addMonth();
+        $currentDateFormatted = $currentDate->toDateString();
+        $expirationDateFormatted = $expirationDate->toDateString();
+
+        $plan = new MyPlan();
+        $plan->user_id = $user_id;
+        $plan->subscribe_at = date('Y-m-d');
+        $plan->expires_at = $expirationDateFormatted;
+        $plan->days_remaining = 0;
+        $plan->status = 1;
+        $plan->amount = $amount;
+        $plan->save();
 
 
-
-
-
-        // if ($request->trx == null || $request->amount == null) {
-        //     $ref = "FUND" . random_int(0000, 9999) . date("his");
-        // } else {
-        //     $ref = $request->trx;
-        //     $amount = Plan::where('id', 1)->first()->amount ?? null;
-        // }
-
-        // $amount = Plan::where('id', 1)->first()->amount ?? null;
-
-        // $currentDate = Carbon::now();
-        // $expirationDate = $currentDate->addMonth();
-        // $currentDateFormatted = $currentDate->toDateString();
-        // $expirationDateFormatted = $expirationDate->toDateString();
-
-        // $plan = new MyPlan();
-        // $plan->user_id = $request->user_id;
-        // $plan->subscribe_at = date('Y-m-d');
-        // $plan->expires_at = $expirationDateFormatted;
-        // $plan->days_remaining = 0;
-        // $plan->status = 1;
-        // $plan->amount = $amount;
-        // $plan->save();
+        $message = "user subscribed successfully";
+        send_notification($message);
 
 
         return http_response_code(200);

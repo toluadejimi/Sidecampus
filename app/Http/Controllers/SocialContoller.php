@@ -57,8 +57,6 @@ class SocialContoller extends Controller
 
 
         if ($request->file != null) {
-
-
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
             $destinationPath = public_path() . 'post/media';
