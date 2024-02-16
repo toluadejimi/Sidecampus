@@ -365,7 +365,7 @@ class PaymentController extends Controller
         $parametersJson = json_encode($request->all());
         send_notification($parametersJson);
 
-        
+
 
 
 
@@ -394,7 +394,7 @@ class PaymentController extends Controller
 
 
 
-        return view('success', compact('ref', 'amount'));
+        // return view('success', compact('ref', 'amount'));
     }
 
 
