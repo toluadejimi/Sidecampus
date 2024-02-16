@@ -46,6 +46,9 @@ Route::get('slider', [HomeController::class, 'home']);
 
 
 
+
+
+
 //login
 Route::post('login', [LoginController::class, 'login']);
 
@@ -53,6 +56,9 @@ Route::post('login', [LoginController::class, 'login']);
 
 //Contact
 Route::get('contact', [ProfileController::class, 'contact']);
+Route::any('webhook', [PaymentController::class, 'success']);
+
+
 
 
 Route::group(['middleware' => ['auth:api', 'acess']], function () {
