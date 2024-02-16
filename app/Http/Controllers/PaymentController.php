@@ -393,6 +393,8 @@ class PaymentController extends Controller
         // $plan->save();
 
 
+        return http_response_code(200);
+
 
         // return view('success', compact('ref', 'amount'));
     }
