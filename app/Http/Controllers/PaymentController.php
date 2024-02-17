@@ -386,11 +386,14 @@ class PaymentController extends Controller
         $message = "user subscribed successfully";
         send_notification($message);
 
+        return response()->json([
 
-        return http_response_code(200);
+            'status' => true,
+            'message' => "Transaction Successful"
+
+        ], 200);
 
 
-        // return view('success', compact('ref', 'amount'));
     }
 
 
