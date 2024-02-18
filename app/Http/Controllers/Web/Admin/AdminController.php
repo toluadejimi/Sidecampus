@@ -246,6 +246,7 @@ class AdminController extends Controller
                 'description' => $request->description,
                 'author' => $request->author,
                 'category' => $request->category,
+                'compressed' => $request->compressed,
             ]);
         }
         return redirect('book-list')->with('message', "Books Updated Successfully");
