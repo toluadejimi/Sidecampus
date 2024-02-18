@@ -163,7 +163,7 @@
 
                             <div class="form-group">
                                 <label>Book Description:</label>
-                                <input type="text" class="form-control" value="{{ $book->description }}" name="description" rows="4">
+                                <input type="text" class="form-control mb-3" value="{{ $book->description }}" name="description" rows="4">
 
 
                             <button type="submit" class="btn btn-primary">Submit</button>
