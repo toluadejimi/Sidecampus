@@ -24,7 +24,7 @@ class AdminController extends Controller
         $data['user'] = User::count();
         $data['transaction'] = Transaction::where('type', 2)->sum('amount');
         $data['categories'] = Category::count();
-        $data['users'] = User::all();
+        $data['users'] = User::paginate('10');
         $data['subs'] = MyPlan::all();
         return view('admin.admindashboard', $data);
     }

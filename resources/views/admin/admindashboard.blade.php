@@ -198,29 +198,6 @@
 
 
 
-                    <div class="iq-card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                    <tr>
-                                        @foreach ($users as $data)
-
-
-                                        @endforeach
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
