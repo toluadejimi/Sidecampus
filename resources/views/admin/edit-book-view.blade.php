@@ -163,7 +163,7 @@
 
                             <div class="form-group">
                                 <label>Book Description:</label>
-                                <textarea class="form-control" value="{{ $book->description }}" name="description" rows="4"></textarea>
+                                <textarea type="text" class="form-control" value="{{ $book->description }}" name="description" rows="4"></textarea>
                             </div>
 
 
