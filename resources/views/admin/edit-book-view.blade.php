@@ -164,7 +164,7 @@
                                 <div class="col-6 my-3">
                                     <div class="form-group">
                                         <label>Compressed </label>
-                                        <select name="compressed" rows="4">
+                                        <select name="compressed" class="form-control" rows="4">
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
                                         </select>
