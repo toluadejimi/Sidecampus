@@ -161,15 +161,12 @@
 
                                 </div>
 
-                                   <div class="col-6 my-3">
+                                <div class="col-6 my-3">
                                     <div class="form-group">
                                         <label>Compressed </label>
                                         <select name="compressed" rows="4">
-
-                                        <option value="1">Yes</option>
-                                          <option value="0">No</option>
-
-                                        
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
                                         </select>
                                     </div>
 
