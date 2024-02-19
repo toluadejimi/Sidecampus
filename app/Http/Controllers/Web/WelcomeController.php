@@ -28,6 +28,14 @@ class WelcomeController extends Controller
     }
 
 
+    public function privacy(){
+
+        return view('privacy');
+
+    }
+
+
+
     public function profile(request $request){
 
 

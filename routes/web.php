@@ -35,6 +35,11 @@ Route::get('log-out', [AuthController::class, 'log_out']);
 
 
 Route::get('/', [WelcomeController::class, 'index']);
+
+Route::get('privacy', [WelcomeController::class, 'privacy']);
+
+
+
 Route::get('admin', [AdminController::class, 'index']);
 Route::get('book-list', [AdminController::class, 'booklist']);
 Route::get('new-book', [AdminController::class, 'new_book_view']);
