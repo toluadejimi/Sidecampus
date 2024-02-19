@@ -183,6 +183,7 @@
                                 <div class="section_title">
                                     <h2>Let’s download free from apple and play store</h2>
                                     <p>Instant free download from apple and play store</p>
+                                    
                                 </div>
                                 <ul class="app_btn">
                                     <li>
