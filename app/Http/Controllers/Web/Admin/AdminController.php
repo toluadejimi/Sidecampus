@@ -10,6 +10,7 @@ use App\Models\Author;
 use App\Models\MyPlan;
 use App\Models\Setting;
 use App\Models\Category;
+use Illuminate\Http\File;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -134,6 +135,7 @@ class AdminController extends Controller
 
 
         if ($request->hasFile('pdf')) {
+
             $file = $request->file('pdf');
             $fileName = $file->getClientOriginalName();
             $destinationPath = public_path() . 'assets/images/book';
