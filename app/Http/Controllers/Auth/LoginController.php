@@ -131,7 +131,7 @@ class LoginController extends Controller
             $user['favorite_book'] = $favorite_book;
             $user['my_plan'] = $myplan;
             $user['keys'] = $keys;
-            $user['inapp_ios_purchase'] = ['1'];
+            $user['inapp_ios_purchase'] = ['01'];
 
 
 
