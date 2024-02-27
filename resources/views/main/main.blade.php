@@ -30,7 +30,7 @@
     </div>
     <!-- loader END -->
     <!-- Wrapper Start -->
-    <div class="wrapper">
+    <div class="">
         <!-- TOP Nav Bar -->
         <div class="iq-top-navbar">
             <div class="iq-navbar-custom">
