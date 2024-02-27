@@ -22,7 +22,7 @@
     <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 </head>
 
-<body>
+<body class="sidebar-main">
 <!-- loader Start -->
 <div id="loading">
     <div id="loading-center">
@@ -36,7 +36,7 @@
         <div class="iq-navbar-custom">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <div class="iq-menu-bt d-flex align-items-center">
-                    <div class="wrapper-menu">
+                    <div class="wrapper-menu open">
                         <div class="main-circle"><i class="las la-bars"></i></div>
                     </div>
                     <div class="iq-navbar-logo d-flex justify-content-between">
