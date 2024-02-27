@@ -31,6 +31,11 @@
 <!-- loader END -->
 <!-- Wrapper Start -->
     <!-- TOP Nav Bar -->
+    <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+
+        </div>
+    </div>
     <!-- TOP Nav Bar END -->
     @yield('content')
 
