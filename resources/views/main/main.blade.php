@@ -48,15 +48,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="navbar-breadcrumb">
-                    <h5 class="mb-0">Welcome</h5>
-                    <nav aria-label="breadcrumb">
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Home Page</li>
-                        </ul>
-                    </nav>
-                </div>
+
                 <div class="iq-search-bar">
                     {{-- <form action="index.html#" class="searchbox">
                         <input type="text" class="text search-input" placeholder="Search Here...">
@@ -72,15 +64,8 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-list">
-                        {{-- <li class="nav-item nav-icon search-content">
-                            <a href="index.html#" class="search-toggle iq-waves-effect text-gray rounded">
-                                <i class="ri-search-line"></i>
-                            </a>
-                            <form action="index.html#" class="search-box p-0">
-                                <input type="text" class="text search-input" placeholder="Type here to search...">
-                                <a class="search-link" href="index.html#"><i class="ri-search-line"></i></a>
-                            </form>
-                        </li> --}}
+
+
 
 
                         @auth
