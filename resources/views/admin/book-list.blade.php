@@ -1,4 +1,4 @@
-@extends('main.admin')
+@extends('main.main')
 @section('content')
 
 
@@ -77,7 +77,7 @@
                                         <td>
                                             <div class="badge badge-pill badge-danger">Uncompressed</div>
                                         </td>
-                                        
+
                                         @endif
                                         <td>
                                             <div class="flex align-items-center list-user-action">
