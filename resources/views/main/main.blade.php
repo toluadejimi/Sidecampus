@@ -48,43 +48,6 @@
                     </div>
                 </div>
             </div>
-            <div id="sidebar-scrollbar">
-                <nav class="iq-sidebar-menu">
-                    <ul id="iq-sidebar-toggle" class="iq-menu">
-                        <li class="active active-menu">
-                            <a href="/" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span
-                                    class="ripple rippleEffect"></span><i
-                                    class="las la-home iq-arrow-left"></i><span>Home</span><i
-                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="dashboard" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
-                                <li class="active"><a href="/"><i class="las la-house-damage"></i>Home Page</a></li>
-
-                                @auth
-                                <li><a href="category.html"><i class="ri-function-line"></i>Category Page</a></li>
-                                <li><a href="book-page.html"><i class="ri-book-line"></i>Book Page</a></li>
-                                <li><a href="book-pdf.html"><i class="ri-file-pdf-line"></i>Book PDF</a></li>
-                                <li><a href="Checkout.html"><i class="ri-checkbox-multiple-blank-line"></i>Checkout</a>
-                                </li>
-                                <li><a href="wishlist.html"><i class="ri-heart-line"></i>wishlist</a></li>
-                                @endauth
-
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-                <div id="sidebar-bottom" class="p-3 position-relative">
-                    <div class="iq-card">
-                        <div class="iq-card-body">
-                            <div class="sidebarbottom-content">
-                                <div class="image"><img src="{{ url('') }}/public/assets/images/page-img//side-bkg.png"
-                                        alt=""></div>
-                                <button type="submit" class="btn w-100 btn-primary mt-4 view-more">Become
-                                    Membership</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- TOP Nav Bar -->
         <div class="iq-top-navbar">
