@@ -66,75 +66,18 @@
                     <ul class="navbar-nav ml-auto navbar-list">
 
 
+                            <li class="active active-menu">
+                                <a href="admin-dashboard.html#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Admin</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                                <ul id="admin" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
+                                    <li class="active"><a href="admin"><i class="las la-house-damage"></i>Dashboard</a></li>
+                                    <li><a href="category"><i class="ri-function-line"></i>Books Category</a></li>
+                                    <li><a href="author"><i class="ri-book-line"></i>Author</a></li>
+                                    <li><a href="book-list"><i class="ri-file-pdf-line"></i>Books</a></li>
+                                    <li><a href="users"><i class="ri-user-line"></i>Users</a></li>
+                                    <li><a href="settings"><i class="ri-settings-line"></i>Settings</a></li>
 
-
-                        @auth
-                            <li class="line-height pt-3">
-                                <a href="index.html#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                                    <img src="{{ url('') }}/public/assets/images/user/1.jpg"
-                                         class="img-fluid rounded-circle mr-3" alt="user">
-                                    <div class="caption">
-                                        <h6 class="mb-1 line-height">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h6>
-                                        <p class="mb-0 text-primary">Click for more</p>
-                                    </div>
-                                </a>
-                                <div class="iq-sub-dropdown iq-user-dropdown">
-                                    <div class="iq-card shadow-none m-0">
-                                        <div class="iq-card-body p-0 ">
-                                            <div class="bg-primary p-3">
-                                                <h5 class="mb-0 text-white line-height">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
-                                                @if (Auth::user()->status == 1)
-
-                                                    <span class="text-white font-size-12">Active</span>
-
-                                                @else
-
-                                                    <span class="text-white font-size-12">Inactive</span>
-
-                                                @endif
-
-                                            </div>
-                                            <a href="profile" class="iq-sub-card iq-bg-primary-hover">
-                                                <div class="media align-items-center">
-                                                    <div class="rounded iq-card-icon iq-bg-primary">
-                                                        <i class="ri-file-user-line"></i>
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">My Profile</h6>
-                                                        <p class="mb-0 font-size-12">View personal profile details.</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="plan" class="iq-sub-card iq-bg-primary-hover">
-                                                <div class="media align-items-center">
-                                                    <div class="rounded iq-card-icon iq-bg-primary">
-                                                        <i class="ri-profile-line"></i>
-                                                    </div>
-                                                    <div class="media-body ml-3">
-                                                        <h6 class="mb-0 ">My Plan</h6>
-                                                        <p class="mb-0 font-size-12">Manage your Subscription</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-
-                                            <div class="d-inline-block w-100 text-center p-3">
-                                                <a class="bg-primary iq-sign-btn" href="log-out" role="button">Sign
-                                                    out<i class="ri-login-box-line ml-2"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </ul>
                             </li>
-                        @else
-
-                            <div class="d-inline-block w-100 text-center p-3">
-                                <a href="login" class="btn btn-success my-3">Login</a>
-
-                                <a href="register" class="btn btn-danger my-3">Register</a>
-                            </div>
-
-                        @endauth
 
 
                     </ul>
