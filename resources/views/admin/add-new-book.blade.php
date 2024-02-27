@@ -40,7 +40,7 @@
 
                             <div class="row">
 
-                                <div class="col-6 col-sm-12">
+                                <div class="col-xl-6 col-sm-12">
 
                                     <div class="form-group">
                                         <label>Book Name:</label>
@@ -51,7 +51,7 @@
 
 
 
-                                <div class="col-3 col-sm-12">
+                                <div class="col-xl-3 col-sm-12">
 
                                     <div class="form-group">
                                         <label>Book Category:</label>
@@ -66,7 +66,7 @@
 
                                 </div>
 
-                                <div class="col-3 col-sm-12">
+                                <div class="col-xl-3 col-sm-12">
 
 
                                     <div class="form-group">
@@ -89,7 +89,7 @@
                             <div class="row">
 
 
-                                <div class="col-4 col-sm-12">
+                                <div class="col-xl-4 col-sm-12">
 
                                     <div class="form-group">
                                         <label>Book Image:</label>
@@ -103,7 +103,7 @@
                                 </div>
 
 
-                                <div class="col-4 col-sm-12">
+                                <div class="col-xl--4 col-sm-12">
 
                                     <div class="form-group">
                                         <label>Book Audio:</label>
@@ -117,7 +117,7 @@
                                 </div>
 
 
-                                <div class="col-4 col-sm-12">
+                                <div class="col-xl-4 col-sm-12">
 
                                     <div class="form-group">
                                         <label>Book pdf:</label>
