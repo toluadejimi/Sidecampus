@@ -23,10 +23,8 @@ class LoginController extends Controller
 {
 
 
-
     public $success = true;
     public $failed = false;
-
 
 
     public function login(Request $request)
@@ -60,7 +58,7 @@ class LoginController extends Controller
 
         $get_token = OauthAccessToken::where('user_id', Auth::id())->first()->user_id ?? null;
 
-        if($get_token != null){
+        if ($get_token != null) {
             OauthAccessToken::where('user_id', Auth::id())->delete();
         }
 
@@ -79,8 +77,6 @@ class LoginController extends Controller
                     'device_id' => $request->device_id ?? null,
                 ]);
         }
-
-
 
 
         if (Auth::user()->status == 5) {
@@ -115,34 +111,32 @@ class LoginController extends Controller
         }
 
 
-            $token = auth()->user()->createToken('API Token')->accessToken;
-            $myplan = MyPlan::select('status', 'subscribe_at','days_remaining','expires_at')->where('user_id', Auth::id())->first() ?? null;
-            $plans = Plan::select('id','title','amount', 'period')->get() ?? null;
-            $save_cards = PayInfo::where('user_id', Auth::id())->select('id','customer_id', 'brand', 'last4', 'exp_month', 'exp_year', 'name')->get();
-            $favorite_book = Favorite::where('user_id', Auth::id())->select('book_image', 'title', 'author', 'dexcription')->get();
-            $myplan = MyPlan::select('status', 'subscribe_at','days_remaining','expires_at')->where('user_id', Auth::id())->first() ?? null;
-            $keys = Setting::select('stripe_s', 'stripe_p')->where('id', 1)->get();
+        $token = auth()->user()->createToken('API Token')->accessToken;
+        $myplan = MyPlan::select('status', 'subscribe_at', 'days_remaining', 'expires_at')->where('user_id', Auth::id())->first() ?? null;
+        $plans = Plan::select('id', 'title', 'amount', 'period')->get() ?? null;
+        $save_cards = PayInfo::where('user_id', Auth::id())->select('id', 'customer_id', 'brand', 'last4', 'exp_month', 'exp_year', 'name')->get();
+        $favorite_book = Favorite::where('user_id', Auth::id())->select('book_image', 'title', 'author', 'dexcription')->get();
+        $myplan = MyPlan::select('status', 'subscribe_at', 'days_remaining', 'expires_at')->where('user_id', Auth::id())->first() ?? null;
+        $keys = Setting::select('stripe_s', 'stripe_p')->where('id', 1)->get();
+        $inapp_ios_purchase = Plan::select('inapp_ios_purchase')->where('id', 1)->first()->inapp_ios_purchase ?? null;
 
 
 
-            $user = Auth()->user();
-            $user['token'] = $token;
-            $user['saved_card'] = $save_cards;
-            $user['favorite_book'] = $favorite_book;
-            $user['my_plan'] = $myplan;
-            $user['keys'] = $keys;
-            $user['inapp_ios_purchase'] = ['01'];
+        $user = Auth()->user();
+        $user['token'] = $token;
+        $user['saved_card'] = $save_cards;
+        $user['favorite_book'] = $favorite_book;
+        $user['my_plan'] = $myplan;
+        $user['keys'] = $keys;
+        $user['inapp_ios_purchase'] = [$inapp_ios_purchase];
 
 
-
-
-
-            return response()->json([
-                'status' => $this->success,
-                'message'=> "Login Successful",
-                'data' => $user,
-                'plans'=> $plans
-            ], 200);
+        return response()->json([
+            'status' => $this->success,
+            'message' => "Login Successful",
+            'data' => $user,
+            'plans' => $plans
+        ], 200);
 
     }
 
