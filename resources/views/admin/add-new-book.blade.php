@@ -103,7 +103,7 @@
                                 </div>
 
 
-                                <div class="col-xl--4 col-sm-12">
+                                <div class="col-xl-4 col-sm-12">
 
                                     <div class="form-group">
                                         <label>Book Audio:</label>
