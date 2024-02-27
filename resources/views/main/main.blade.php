@@ -17,129 +17,132 @@
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="{{ url('') }}/public/assets/css/responsive.css">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 </head>
 
 <body>
-<!-- loader Start -->
-<div id="loading">
-    <div id="loading-center">
+    <!-- loader Start -->
+    <div id="loading">
+        <div id="loading-center">
+        </div>
     </div>
-</div>
-<!-- loader END -->
-<!-- Wrapper Start -->
-<div class="wrapper">
-    <!-- Sidebar  -->
-    <div class="iq-sidebar">
-        <div class="iq-sidebar-logo d-flex justify-content-between">
-            <a href="/" class="header-logo">
-                <img src="{{ url('') }}/public/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
-                <div class="logo-title">
-                    <span class="text-primary text-uppercase">Side Campus</span>
-                </div>
-            </a>
-            <div class="iq-menu-bt-sidebar">
-                <div class="iq-menu-bt align-self-center">
-                    <div class="wrapper-menu">
-                        <div class="main-circle"><i class="las la-bars"></i></div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <div class="iq-sidebar">
+            <div class="iq-sidebar-logo d-flex justify-content-between">
+                <a href="/" class="header-logo">
+                    <img src="{{ url('') }}/public/assets/images/logo.png" class="img-fluid rounded-normal" alt="">
+                    <div class="logo-title">
+                        <span class="text-primary text-uppercase">Side Campus</span>
+                    </div>
+                </a>
+                <div class="iq-menu-bt-sidebar">
+                    <div class="iq-menu-bt align-self-center">
+                        <div class="wrapper-menu">
+                            <div class="main-circle"><i class="las la-bars"></i></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div id="sidebar-scrollbar">
+                <nav class="iq-sidebar-menu">
+                    <ul id="iq-sidebar-toggle" class="iq-menu">
+                        <li class="active active-menu">
+                            <a href="/" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span
+                                    class="ripple rippleEffect"></span><i
+                                    class="las la-home iq-arrow-left"></i><span>Home</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                            <ul id="dashboard" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
+                                <li class="active"><a href="/"><i class="las la-house-damage"></i>Home Page</a></li>
 
+                                @auth
+                                <li><a href="category.html"><i class="ri-function-line"></i>Category Page</a></li>
+                                <li><a href="book-page.html"><i class="ri-book-line"></i>Book Page</a></li>
+                                <li><a href="book-pdf.html"><i class="ri-file-pdf-line"></i>Book PDF</a></li>
+                                <li><a href="Checkout.html"><i class="ri-checkbox-multiple-blank-line"></i>Checkout</a>
+                                </li>
+                                <li><a href="wishlist.html"><i class="ri-heart-line"></i>wishlist</a></li>
+                                @endauth
 
-        <div id="sidebar-scrollbar">
-            <nav class="iq-sidebar-menu">
-                <ul id="iq-sidebar-toggle" class="iq-menu">
-                    <li>
-
-                    <li class="active active-menu">
-                        <a href="admin-dashboard.html#admin" class="iq-waves-effect" data-toggle="collapse"
-                           aria-expanded="true"><span class="ripple rippleEffect"></span><i
-                                class="las la-home iq-arrow-left"></i><span>Admin</span><i
-                                class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="admin" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
-                            <li class="active"><a href="admin"><i class="las la-house-damage"></i>Dashboard</a></li>
-                            <li><a href="category"><i class="ri-function-line"></i>Books Category</a></li>
-                            <li><a href="author"><i class="ri-book-line"></i>Author</a></li>
-                            <li><a href="book-list"><i class="ri-file-pdf-line"></i>Books</a></li>
-                            <li><a href="users"><i class="ri-user-line"></i>Users</a></li>
-                            <li><a href="settings"><i class="ri-settings-line"></i>Settings</a></li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <div id="sidebar-bottom" class="p-3 position-relative">
-                <div class="iq-card">
-                    <div class="iq-card-body">
-                        <div class="sidebarbottom-content">
-                            <a href="log-out" class="btn w-100 btn-primary mt-4">Log Out</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div id="sidebar-bottom" class="p-3 position-relative">
+                    <div class="iq-card">
+                        <div class="iq-card-body">
+                            <div class="sidebarbottom-content">
+                                <div class="image"><img src="{{ url('') }}/public/assets/images/page-img//side-bkg.png"
+                                        alt=""></div>
+                                <button type="submit" class="btn w-100 btn-primary mt-4 view-more">Become
+                                    Membership</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- TOP Nav Bar -->
-    <div class="iq-top-navbar">
-        <div class="iq-navbar-custom">
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-                <div class="iq-menu-bt d-flex align-items-center">
-                    <div class="wrapper-menu">
-                        <div class="main-circle"><i class="las la-bars"></i></div>
+        <!-- TOP Nav Bar -->
+        <div class="iq-top-navbar">
+            <div class="iq-navbar-custom">
+                <nav class="navbar navbar-expand-lg navbar-light p-0">
+                    <div class="iq-menu-bt d-flex align-items-center">
+                        <div class="wrapper-menu">
+                            <div class="main-circle"><i class="las la-bars"></i></div>
+                        </div>
+                        <div class="iq-navbar-logo d-flex justify-content-between">
+                            <a href="index.html" class="header-logo">
+                                <img src="images/logo.png" class="img-fluid rounded-normal" alt="">
+                                <div class="logo-title">
+                                    <span class="text-primary text-uppercase">Booksto</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                    <div class="iq-navbar-logo d-flex justify-content-between">
-                        <a href="index.html" class="header-logo">
-                            <img src="images/logo.png" class="img-fluid rounded-normal" alt="">
-                            <div class="logo-title">
-                                <span class="text-primary text-uppercase">Booksto</span>
-                            </div>
-                        </a>
+                    <div class="navbar-breadcrumb">
+                        <h5 class="mb-0">Welcome</h5>
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Home Page</li>
+                            </ul>
+                        </nav>
                     </div>
-                </div>
-                <div class="navbar-breadcrumb">
-                    <h5 class="mb-0">Welcome</h5>
-                    <nav aria-label="breadcrumb">
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Home Page</li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="iq-search-bar">
-                    {{-- <form action="index.html#" class="searchbox">
-                        <input type="text" class="text search-input" placeholder="Search Here...">
-                        <a class="search-link" href="index.html#"><i class="ri-search-line"></i></a>
-                    </form> --}}
-                </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    <div class="iq-search-bar">
+                        {{-- <form action="index.html#" class="searchbox">
+                            <input type="text" class="text search-input" placeholder="Search Here...">
+                            <a class="search-link" href="index.html#"><i class="ri-search-line"></i></a>
+                        </form> --}}
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-label="Toggle navigation">
-                    <i class="ri-menu-3-line"></i>
-                </button>
+                        <i class="ri-menu-3-line"></i>
+                    </button>
 
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-list">
-                        {{-- <li class="nav-item nav-icon search-content">
-                            <a href="index.html#" class="search-toggle iq-waves-effect text-gray rounded">
-                                <i class="ri-search-line"></i>
-                            </a>
-                            <form action="index.html#" class="search-box p-0">
-                                <input type="text" class="text search-input" placeholder="Type here to search...">
-                                <a class="search-link" href="index.html#"><i class="ri-search-line"></i></a>
-                            </form>
-                        </li> --}}
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto navbar-list">
+                            {{-- <li class="nav-item nav-icon search-content">
+                                <a href="index.html#" class="search-toggle iq-waves-effect text-gray rounded">
+                                    <i class="ri-search-line"></i>
+                                </a>
+                                <form action="index.html#" class="search-box p-0">
+                                    <input type="text" class="text search-input" placeholder="Type here to search...">
+                                    <a class="search-link" href="index.html#"><i class="ri-search-line"></i></a>
+                                </form>
+                            </li> --}}
 
 
-                        @auth
+                          @auth
                             <li class="line-height pt-3">
                                 <a href="index.html#" class="search-toggle iq-waves-effect d-flex align-items-center">
                                     <img src="{{ url('') }}/public/assets/images/user/1.jpg"
-                                         class="img-fluid rounded-circle mr-3" alt="user">
+                                        class="img-fluid rounded-circle mr-3" alt="user">
                                     <div class="caption">
                                         <h6 class="mb-1 line-height">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h6>
                                         <p class="mb-0 text-primary">Click for more</p>
@@ -152,11 +155,11 @@
                                                 <h5 class="mb-0 text-white line-height">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
                                                 @if (Auth::user()->status == 1)
 
-                                                    <span class="text-white font-size-12">Active</span>
+                                                <span class="text-white font-size-12">Active</span>
 
                                                 @else
 
-                                                    <span class="text-white font-size-12">Inactive</span>
+                                                <span class="text-white font-size-12">Inactive</span>
 
                                                 @endif
 
@@ -193,7 +196,7 @@
                                     </div>
                                 </div>
                             </li>
-                        @else
+                            @else
 
                             <div class="d-inline-block w-100 text-center p-3">
                                 <a href="login" class="btn btn-success my-3">Login</a>
@@ -201,92 +204,97 @@
                                 <a href="register" class="btn btn-danger my-3">Register</a>
                             </div>
 
-                        @endauth
 
 
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- TOP Nav Bar END -->
-    @yield('content')
 
-    <!-- Footer -->
-    <footer class="iq-footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-6 text-right">
-                    Copyright 2020 <a href="index.html#">Booksto</a> All Rights Reserved.
-                </div>
+                          @endauth
+
+
+                        </ul>
+                    </div>
+                </nav>
             </div>
         </div>
-    </footer>
-    <!-- Footer END -->
-    <!-- color-customizer -->
+        <!-- TOP Nav Bar END -->
+        @yield('content')
+
+        <!-- Footer -->
+        <footer class="iq-footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        Copyright 2020 <a href="index.html#">Booksto</a> All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer END -->
+        <!-- color-customizer -->
 
 
-    <!-- color-customizer END -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{{ url('') }}/public/assets/js/jquery.min.js"></script>
-    <script src="{{ url('') }}/public/assets/js/popper.min.js"></script>
-    <script src="{{ url('') }}/public/assets/js/bootstrap.min.js"></script>
-    <!-- Appear JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/jquery.appear.js"></script>
-    <!-- Countdown JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/countdown.min.js"></script>
-    <!-- Counterup JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/waypoints.min.js"></script>
-    <script src="{{ url('') }}/public/assets/js/jquery.counterup.min.js"></script>
-    <!-- Wow JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/wow.min.js"></script>
-    <!-- Apexcharts JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/apexcharts.js"></script>
-    <!-- Slick JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/slick.min.js"></script>
-    <!-- Select2 JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/select2.min.js"></script>
-    <!-- Owl Carousel JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/owl.carousel.min.js"></script>
-    <!-- Magnific Popup JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/jquery.magnific-popup.min.js"></script>
-    <!-- Smooth Scrollbar JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/smooth-scrollbar.js"></script>
-    <!-- lottie JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/lottie.js"></script>
-    <!-- am core JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/core.js"></script>
-    <!-- am charts JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/charts.js"></script>
-    <!-- am animated JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/animated.js"></script>
-    <!-- am kelly JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/kelly.js"></script>
-    <!-- am maps JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/maps.js"></script>
-    <!-- am worldLow JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/worldLow.js"></script>
-    <!-- Raphael-min JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/raphael-min.js"></script>
-    <!-- Morris JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/morris.js"></script>
-    <!-- Morris min JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/morris.min.js"></script>
-    <!-- Flatpicker Js -->
-    <script src="{{ url('') }}/public/assets/js/flatpickr.js"></script>
-    <!-- Style Customizer -->
-    <script src="{{ url('') }}/public/assets/js/style-customizer.js"></script>
-    <!-- Chart Custom JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/chart-custom.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="{{ url('') }}/public/assets/js/custom.js"></script>
+
+
+        <!-- color-customizer END -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{{ url('') }}/public/assets/js/jquery.min.js"></script>
+        <script src="{{ url('') }}/public/assets/js/popper.min.js"></script>
+        <script src="{{ url('') }}/public/assets/js/bootstrap.min.js"></script>
+        <!-- Appear JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/jquery.appear.js"></script>
+        <!-- Countdown JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/countdown.min.js"></script>
+        <!-- Counterup JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/waypoints.min.js"></script>
+        <script src="{{ url('') }}/public/assets/js/jquery.counterup.min.js"></script>
+        <!-- Wow JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/wow.min.js"></script>
+        <!-- Apexcharts JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/apexcharts.js"></script>
+        <!-- Slick JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/slick.min.js"></script>
+        <!-- Select2 JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/select2.min.js"></script>
+        <!-- Owl Carousel JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/owl.carousel.min.js"></script>
+        <!-- Magnific Popup JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/jquery.magnific-popup.min.js"></script>
+        <!-- Smooth Scrollbar JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/smooth-scrollbar.js"></script>
+        <!-- lottie JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/lottie.js"></script>
+        <!-- am core JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/core.js"></script>
+        <!-- am charts JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/charts.js"></script>
+        <!-- am animated JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/animated.js"></script>
+        <!-- am kelly JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/kelly.js"></script>
+        <!-- am maps JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/maps.js"></script>
+        <!-- am worldLow JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/worldLow.js"></script>
+        <!-- Raphael-min JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/raphael-min.js"></script>
+        <!-- Morris JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/morris.js"></script>
+        <!-- Morris min JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/morris.min.js"></script>
+        <!-- Flatpicker Js -->
+        <script src="{{ url('') }}/public/assets/js/flatpickr.js"></script>
+        <!-- Style Customizer -->
+        <script src="{{ url('') }}/public/assets/js/style-customizer.js"></script>
+        <!-- Chart Custom JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/chart-custom.js"></script>
+        <!-- Custom JavaScript -->
+        <script src="{{ url('') }}/public/assets/js/custom.js"></script>
 </body>
 
 </html>
