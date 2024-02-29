@@ -118,8 +118,7 @@ class LoginController extends Controller
         $favorite_book = Favorite::where('user_id', Auth::id())->select('book_image', 'title', 'author', 'dexcription')->get();
         $myplan = MyPlan::select('status', 'subscribe_at', 'days_remaining', 'expires_at')->where('user_id', Auth::id())->first() ?? null;
         $keys = Setting::select('stripe_s', 'stripe_p')->where('id', 1)->get();
-        $abusive_words = Setting::where('id', 1)->first()->abusive_words ?? null;
-        $words = json_decode($abusive_words);
+        $abusive_words = ["Fuck", "Pussy"];
 
         $inapp_ios_purchase = Plan::select('inapp_ios_purchase')->where('id', 1)->first()->inapp_ios_purchase ?? null;
 
@@ -130,7 +129,7 @@ class LoginController extends Controller
         $user['my_plan'] = $myplan;
         $user['keys'] = $keys;
         $user['inapp_ios_purchase'] = [$inapp_ios_purchase];
-        $user['abusive_words'] = $words;
+        $user['abusive_words'] = $abusive_words;
 
 
 
