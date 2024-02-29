@@ -14,7 +14,9 @@ class Post extends Model
 
         'likes' => 'integer',
         'comment' => 'integer',
-    
+        'user_id' => 'integer',
+
+
 
     ];
 }

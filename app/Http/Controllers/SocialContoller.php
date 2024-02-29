@@ -17,7 +17,7 @@ class SocialContoller extends Controller
     {
         $perPage = 10;
         $offset = ($batchNumber - 1) * $perPage;
-        $data['all_posts'] = Post::select('id', 'user_id', 'user_image', 'user_name', 'created_at', 'media', 'media_title', 'message', 'likes', 'comment')
+        $data['all_posts'] = Post::select('id','user_id','user_image', 'user_name', 'created_at', 'media', 'media_title', 'message', 'likes', 'comment')
             ->latest()
             ->offset($offset)
             ->limit($perPage)
@@ -43,7 +43,7 @@ class SocialContoller extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "Post Reported Successfully",
+            'message' => "",
         ], 200);
 
     }
