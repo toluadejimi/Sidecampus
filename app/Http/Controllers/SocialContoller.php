@@ -35,10 +35,10 @@ class SocialContoller extends Controller
     public function report_post(request $request)
     {
 
-        Post::where('id', $request->id)
+        Post::where('id', $request->post_id)
             ->update([
                 'status' => 2,
-                'reason' => $request->reason,
+                'reason' => $request->comment,
             ]);
 
         return response()->json([
