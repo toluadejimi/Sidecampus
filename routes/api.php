@@ -49,6 +49,7 @@ Route::get('slider', [HomeController::class, 'home']);
 
 
 
+
 //login
 Route::post('login', [LoginController::class, 'login']);
 
@@ -101,6 +102,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
     Route::get('my-post/{batchNumber}', [SocialContoller::class, 'my_post']);
     Route::post('post', [SocialContoller::class, 'post']);
     Route::post('edit-post', [SocialContoller::class, 'edit_post']);
+    Route::post('report-post', [HomeController::class, 'report_post']);
     Route::post('like-post', [SocialContoller::class, 'like']);
     Route::post('unlike-post', [SocialContoller::class, 'unlike']);
     Route::post('delete-post', [SocialContoller::class, 'delete_post']);

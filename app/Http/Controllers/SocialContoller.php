@@ -22,7 +22,7 @@ class SocialContoller extends Controller
             ->offset($offset)
             ->limit($perPage)
             ->get();
-        $data['total_count'] =  Post::count();
+        $data['total_count'] = Post::count();
         $data['index'] = $perPage;
 
         return response()->json([
@@ -30,6 +30,24 @@ class SocialContoller extends Controller
             'posts' => $data,
         ], 200);
     }
+
+
+    public function report_post(request $request)
+    {
+
+        Post::where('id', $request->id)
+            ->update([
+                'status' => 2,
+                'reason' => $request->reason,
+            ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => "Post Reported Successfully",
+        ], 200);
+
+    }
+
 
     public function my_post($batchNumber)
     {
@@ -41,7 +59,7 @@ class SocialContoller extends Controller
             ->offset($offset)
             ->limit($perPage)
             ->get();
-        $data['total_count'] =  Post::where('user_id', Auth::id())
+        $data['total_count'] = Post::where('user_id', Auth::id())
             ->count();
         $data['index'] = $perPage;
 
@@ -77,13 +95,13 @@ class SocialContoller extends Controller
 
                 'status' => true,
                 'message' => "Post successful",
-    
+
             ], 200);
 
         }
 
 
-        if($request->message != null && $request->file == null) {
+        if ($request->message != null && $request->file == null) {
 
 
             $post = new Post();
@@ -98,7 +116,7 @@ class SocialContoller extends Controller
 
                 'status' => true,
                 'message' => "Post successful",
-    
+
             ], 200);
 
 
@@ -113,7 +131,6 @@ class SocialContoller extends Controller
         ], 500);
 
 
-       
     }
 
 
@@ -147,13 +164,12 @@ class SocialContoller extends Controller
     }
 
 
-
     public function open_comment(request $request)
     {
 
 
         $data['comment'] = Comment::select('id', 'user_image', 'user_name', 'created_at', 'comment', 'comment_count')
-        ->where('id', $request->comment_id)->get();
+            ->where('id', $request->comment_id)->get();
         $data['sub_comment'] = SubComment::select('id', 'user_id', 'user_image', 'user_name', 'comment', 'created_at')->latest()->where('comment_id', $request->comment_id)->get();
 
         return response()->json([
@@ -163,9 +179,8 @@ class SocialContoller extends Controller
 
         ], 200);
 
-        
-    }
 
+    }
 
 
     public function unlike(request $request)
@@ -179,7 +194,6 @@ class SocialContoller extends Controller
 
         ], 200);
     }
-
 
 
     public function delete_post(request $request)
@@ -216,7 +230,6 @@ class SocialContoller extends Controller
 
         ], 200);
     }
-
 
 
     public function edit_comment(request $request)
