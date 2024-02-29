@@ -11,12 +11,9 @@ class Post extends Model
 
 
     protected $casts = [
-
         'likes' => 'integer',
         'comment' => 'integer',
         'user_id' => 'integer',
-
-
 
     ];
 }
