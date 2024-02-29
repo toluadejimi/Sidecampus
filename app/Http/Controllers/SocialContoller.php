@@ -43,7 +43,7 @@ class SocialContoller extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "",
+            'message' => "Report received. Review in progress. Thanks for helping!",
         ], 200);
 
     }
