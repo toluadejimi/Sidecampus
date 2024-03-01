@@ -14,6 +14,7 @@ class Comment extends Model
         'likes' => 'integer',
         'comment' => 'integer',
         'user_id' => 'integer',
+        'post_id' => 'integer',
         'id' => 'integer',
 
     ];
