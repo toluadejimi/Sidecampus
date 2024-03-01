@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+
+
+    protected $casts = [
+        'likes' => 'integer',
+        'comment' => 'integer',
+        'user_id' => 'integer',
+        'id' => 'integer',
+
+    ];
 }
