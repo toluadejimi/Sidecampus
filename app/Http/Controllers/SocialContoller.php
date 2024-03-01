@@ -49,6 +49,23 @@ class SocialContoller extends Controller
     }
 
 
+    public function report_comment(request $request)
+    {
+
+        Comment::where('comment_id', $request->comment_id)
+            ->update([
+                'status' => 2,
+                'reason' => $request->comment,
+            ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => "Report received. Review in progress. Thanks for helping!",
+        ], 200);
+
+    }
+
+
     public function my_post($batchNumber)
     {
         $perPage = 10;
