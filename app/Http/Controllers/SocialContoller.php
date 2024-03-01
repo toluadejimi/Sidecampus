@@ -152,7 +152,7 @@ class SocialContoller extends Controller
     {
 
 
-        $data['post'] = Post::select('id', 'user_image', 'user_name', 'created_at', 'media', 'media_title', 'message', 'likes', 'comment')->where('id', $request->post_id)->get();
+        $data['post'] = Post::select('id', 'user_id', 'user_image', 'user_name', 'created_at', 'media', 'media_title', 'message', 'likes', 'comment')->where('id', $request->post_id)->get();
         $data['comment'] = Comment::select('id', 'user_id', 'post_id', 'user_image', 'user_name', 'comment', 'created_at')->latest()->where('post_id', $request->post_id)->get();
 
         return response()->json([
