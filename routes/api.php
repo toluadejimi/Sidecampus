@@ -97,6 +97,7 @@ Route::group(['middleware' => ['auth:api', 'acess']], function () {
 
 
 
+
     //Community
     Route::get('all-post/{batchNumber}', [SocialContoller::class, 'all_post']);
     Route::get('my-post/{batchNumber}', [SocialContoller::class, 'my_post']);

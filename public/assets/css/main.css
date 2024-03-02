@@ -5,80 +5,99 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     font: inherit;
     font-size: 100%;
     vertical-align: baseline
-    }
-    html {
+}
+
+html {
     line-height: 1
-    }
-    ol, ul {
+}
+
+ol, ul {
     list-style: none
-    }
-    table {
+}
+
+table {
     border-collapse: collapse;
     border-spacing: 0
-    }
-    caption, th, td {
+}
+
+caption, th, td {
     text-align: left;
     font-weight: normal;
     vertical-align: middle
-    }
-    q, blockquote {
+}
+
+q, blockquote {
     quotes: none
-    }
-    q:before, q:after, blockquote:before, blockquote:after {
+}
+
+q:before, q:after, blockquote:before, blockquote:after {
     content: "";
     content: none
-    }
-    a img {
+}
+
+a img {
     border: none
-    }
-    article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
     display: block
-    }
-    html, button, input, select, textarea {
+}
+
+html, button, input, select, textarea {
     color: #222
-    }
-    html {
+}
+
+html {
     font-size: 1em;
     line-height: 1.4
-    }
-    ::-moz-selection {
-    background:#b3d4fc;
-    text-shadow:none
-    }
-    ::selection {
+}
+
+::-moz-selection {
     background: #b3d4fc;
     text-shadow: none
-    }
-    hr {
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none
+}
+
+hr {
     display: block;
     height: 1px;
     border: 0;
     border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0
-    }
-    audio, canvas, img, video {
+}
+
+audio, canvas, img, video {
     vertical-align: middle
-    }
-    fieldset {
+}
+
+fieldset {
     border: 0;
     margin: 0;
     padding: 0
-    }
-    textarea {
+}
+
+textarea {
     resize: vertical
-    }
-    .browsehappy {
+}
+
+.browsehappy {
     margin: 0.2em 0;
     background: #ccc;
     color: #000;
     padding: 0.2em 0
-    }
-    body {
+}
+
+body {
     font: 100% 'Open Sans', Arial, Helvetica, sans-serif;
     background: #fff
-    }
-    .dialPad .number {
+}
+
+.dialPad .number {
     position: relative;
     z-index: 2;
     padding: 15px 20px;
@@ -87,75 +106,91 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     font-size: 40px;
     background: #fff;
     height: 78px
-    }
-    .dialPad .dials {
+}
+
+.dialPad .dials {
     margin: -1px 0 0 -1px;
     background: #1d1918;
     cursor: pointer
-    }
-    .dialPad .dials:before, .dialPad .dials:after {
+}
+
+.dialPad .dials:before, .dialPad .dials:after {
     content: "\0020";
     display: block;
     height: 0;
     overflow: hidden
-    }
-    .dialPad .dials:after {
+}
+
+.dialPad .dials:after {
     clear: both
-    }
-    .dialPad .dials .digits {
+}
+
+.dialPad .dials .digits {
     float: left;
     width: 33.33%
-    }
-    .dialPad .dials .digits p {
+}
+
+.dialPad .dials .digits p {
     font-weight: 600;
     padding: 15px 25px;
     border-top: 1px solid #4d4d4d;
     border-right: 1px solid #000;
     border-bottom: 1px solid #000;
     border-left: 1px solid #4d4d4d
-    }
-    .dialPad .dials .digits p strong {
+}
+
+.dialPad .dials .digits p strong {
     font-size: 50px;
     margin-right: 8px;
     color: #fff
-    }
-    .dialPad .dials .digits:active {
+}
+
+.dialPad .dials .digits:active {
     background: #00caf2;
     border-top-color: #b2f2ff
-    }
-    .compact .dials .digits p {
+}
+
+.compact .dials .digits p {
     padding: 25px 15px
-    }
-    .compact .dials .digits p strong {
+}
+
+.compact .dials .digits p strong {
     font-size: 30px
-    }
-    .compact .dials .digits p sup {
+}
+
+.compact .dials .digits p sup {
     text-transform: uppercase;
     color: #c1c1c1
-    }
-    .compact .dials .pad-action {
+}
+
+.compact .dials .pad-action {
     background: #093
-    }
-    .compact .dials .pad-action:active {
+}
+
+.compact .dials .pad-action:active {
     background: #0c3
-    }
-    .ir {
+}
+
+.ir {
     background-color: transparent;
     border: 0;
     overflow: hidden;
-    *text-indent:-9999px
-    }
-    .ir:before {
+    *text-indent: -9999px
+}
+
+.ir:before {
     content: "";
     display: block;
     width: 0;
     height: 150%
-    }
-    .hidden {
+}
+
+.hidden {
     display: none !important;
     visibility: hidden
-    }
-    .visuallyhidden {
+}
+
+.visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -164,25 +199,30 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     padding: 0;
     position: absolute;
     width: 1px
-    }
-    .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+}
+
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
     clip: auto;
     height: auto;
     margin: 0;
     overflow: visible;
     position: static;
     width: auto
-    }
-    .invisible {
+}
+
+.invisible {
     visibility: hidden
-    }
-    .clearfix:before, .clearfix:after {
+}
+
+.clearfix:before, .clearfix:after {
     content: " ";
     display: table
-    }
-    .clearfix:after {
+}
+
+.clearfix:after {
     clear: both
-    }
-    .clearfix {
-    *zoom:1
-    }
+}
+
+.clearfix {
+    *zoom: 1
+}
