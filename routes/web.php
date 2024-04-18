@@ -2,6 +2,7 @@
 
 use App\Events\NewMessage;
 use App\Events\RealTimeMessage;
+use App\Http\Controllers\WebWelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\VoiceController;
@@ -35,6 +36,12 @@ Route::get('log-out', [AuthController::class, 'log_out']);
 
 
 Route::get('/', [WelcomeController::class, 'index']);
+
+Route::get('delete-account', [WebWelcomeController::class, 'delete_account_view']);
+Route::post('delete-account-now', [WebWelcomeController::class, 'delete_account']);
+
+
+
 
 Route::get('privacy', [WelcomeController::class, 'privacy']);
 
